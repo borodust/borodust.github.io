@@ -1,3 +1,7 @@
+# Gems
+gems:
+  - jekyll-paginate
+
 # Dependencies
 markdown:         kramdown
 highlighter:      rouge
@@ -6,20 +10,18 @@ highlighter:      rouge
 permalink:        pretty
 
 # Setup
-title:            Hyde
-tagline:          'A Jekyll theme'
-description:      'A brazen two-column <a href="http://jekyllrb.com" target="_blank">Jekyll</a> theme that pairs a prominent sidebar with uncomplicated content. Made by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>.'
-url:              http://hyde.getpoole.com
-baseurl:          /
+title:            'Pavel Korolev'
+tagline:          'Borodust Webpage'
+description:      'Aware software developer'
 
 author:
-  name:           'Mark Otto'
-  url:            https://twitter.com/mdo
+  name:           'Pavel Korolev'
+  email:          mail@borodust.org
+  url:            https://github.com/borodust
 
+paginate_path:    /blog/page:num/
 paginate:         5
 
 # Custom vars
-version:          2.1.0
-
-github:
-  repo:           https://github.com/poole/hyde
+borodust:
+  github:        http://github.com/borodust
