@@ -1,0 +1,13 @@
+.social-icon {
+    height: 2em;
+    display: inline;
+    margin-right: 1ex;
+}
+
+.copyright-container {
+    position: absolute;
+    bottom: 0;
+    margin-right: 1ex;
+    margin-bottom: 1ex;
+    font-size: small;
+}

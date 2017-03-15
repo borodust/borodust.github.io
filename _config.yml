@@ -24,4 +24,6 @@ paginate:         5
 
 # Custom vars
 borodust:
-  github:        http://github.com/borodust
+  github:        https://github.com/borodust
+  twitter:       https://twitter.com/borodust
+  facebook:      https://facebook.com/borodust

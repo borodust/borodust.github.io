@@ -34,10 +34,17 @@
           {% endif %}
         {% endif %}
       {% endfor %}
-
-      <a class="sidebar-nav-item" href="{{ site.borodust.github }}">GitHub page</a>
     </nav>
 
-    <p>&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>
+    <p>
+      <a href="mailto:{{ site.author.email }}" target="_blank"><img src="{% link public/email.svg %}" class="social-icon"></a>
+      <a href="{{ site.borodust.github }}" target="_blank"><img src="{% link public/gh.svg %}" class="social-icon"></a>
+      <a href="{{ site.borodust.facebook }}" target="_blank"><img src="{% link public/fb.svg %}" class="social-icon"></a>
+      <a href="{{ site.borodust.twitter }}" target="_blank"><img src="{% link public/twitter.svg %}" class="social-icon"></a>
+    </p>
+    <div class="copyright-container">
+      <div>&copy; {{ site.time | date: '%Y' }}. All rights reserved.</div>
+      <div>&copy; <a href="https://www.iconfinder.com/iconsets/black-white-social-media" target="_blank">"Black White Social Media"</a> iconset by <a href="https://www.iconfinder.com/AlfredoCreates" target="_blank">Alfredo</a>, licensed under <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC BY 3.0</a></div>
+    </div>
   </div>
 </div>
