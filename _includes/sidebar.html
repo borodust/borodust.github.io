@@ -29,11 +29,6 @@
       {% endfor %}
     </nav>
 
-    <p>
-      <a href="mailto:{{ site.author.email }}" target="_blank"><img src="{% link public/email.svg %}" class="social-icon"></a>
-      <a href="{{ site.borodust.github }}" target="_blank"><img src="{% link public/gh.svg %}" class="social-icon"></a>
-      <a href="{{ site.borodust.facebook }}" target="_blank"><img src="{% link public/fb.svg %}" class="social-icon"></a>
-      <a href="{{ site.borodust.twitter }}" target="_blank"><img src="{% link public/twitter.svg %}" class="social-icon"></a>
-    </p>
+    {% include social.html %}
   </div>
 </div>
