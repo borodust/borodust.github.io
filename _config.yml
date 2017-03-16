@@ -19,7 +19,6 @@ author:
   email:          mail@borodust.org
   url:            https://github.com/borodust
 
-paginate_path:    /blog/page:num/
 paginate:         5
 
 # Custom vars
