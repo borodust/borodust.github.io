@@ -15,7 +15,7 @@
       <a class="sidebar-nav-item{% if page.url == rel_home %} active{% endif %}"
          href="{{ rel_home }}">Home</a>
 
-      {% capture blog_link %}{% link blog.html %}{% endcapture %}
+      {% capture blog_link %}{% link blog/index.html %}{% endcapture %}
       {% capture rel_blog_link %}{{ blog_link | relative_url }}{% endcapture %}
       <a class="sidebar-nav-item{% if page.url == rel_blog_link %} active{% endif %}"
          href="{{ rel_blog_link }}">Blog</a>
