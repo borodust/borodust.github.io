@@ -16,6 +16,12 @@ body, html {
     position: relative;
 }
 
+@media (min-width: 48em) {
+  .content-area {
+    max-width: 48rem;
+  }
+}
+
 .copyright-container {
     position: absolute;
     bottom: 0;
@@ -31,4 +37,12 @@ body, html {
     float: left;
     margin-right: 2em;
     margin-bottom: 1em;
+}
+
+.highlight .s {
+    color: #158c07;
+}
+
+.highlight .ss {
+    color: #e06b06;
 }
