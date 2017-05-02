@@ -18,7 +18,7 @@ via [Quicklisp](https://www.quicklisp.org/) or bundling executable with required
 
 ## Quicklisp
 
-Users that would like to take a deep look into how a game actually works will appreciate this
+Users that would like to take a deep look into how game actually works will appreciate this
 method of delivery. Sharing CL code through Quicklisp is awesome, but couple of problems arise:
 what if our code depends on a foreign dynamic library and how do we get access to game assets.
 
@@ -137,12 +137,12 @@ install_name_tool -change /hard-coded/path/to/libdependency.dylib \
 
 ### Custom Quicklisp distribution
 
-Asking a user to clone/download a single project into a directory where `asdf` or `quicklisp`
-can find it and a user will be able to load it is fine. But if there are few projects to clone,
-it quickly becomes cumbersome to do. To partially solve this inconvenience for end-users of our
-software, one can deploy custom Quicklisp distribution made with `quickdist` tool[^3] onto
-public server somewhere. Users then will be able to load all libraries your game needs with just
-two commands:
+Asking a user to clone/download a single project into a directory, where `asdf` or `quicklisp`
+can find it and a user will be able to load it, is acceptable. But if there are few projects to
+clone, it quickly becomes cumbersome to do. To partially solve this inconvenience for end-users
+of our software, one can deploy custom Quicklisp distribution made with `quickdist` tool[^3]
+onto public server somewhere. Users then will be able to load all libraries your game needs with
+just two commands:
 
 ``` common_lisp
 ;;; for cl-bodge distribution and :trivial-gamekit system
@@ -159,9 +159,9 @@ two commands:
 
 While distributing one's application amongst fellow Common Lisp users with Quicklisp might seem
 like an obvious way and suits libraries especially well, it doesn't really work much for
-applications intended for end-users that rarely care about language it was written in. But it is
-actually somewhat easier to distribute bundled version of an application rather than its bare
-`asdf` system.
+applications intended for end-users that rarely care about language it was written
+in. Hopefully, it is actually somewhat easier to distribute bundled version of an application
+rather than its bare `asdf` system.
 
 
 ### Executable
