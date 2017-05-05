@@ -3,6 +3,11 @@ layout: page
 title: Linkyard
 ---
 
+* [Common Lisp](#common-lisp)
+* [Math](#math)
+* [Bikes](#bikes)
+* [Gaming](#gaming)
+
 ## Common Lisp
 <http://www.gigamonkeys.com/book/>
 : Practical Common Lisp - awesome **free** online version of a book for learning Common Lisp
@@ -13,8 +18,14 @@ title: Linkyard
 <http://lispgames.org>
 : Lisp gamedev resources
 
-<http://lispgamejam.org>
-: Lisp Game Jams and related information
+
+## Math
+[A Beginners Guide to Dual-Quaternions](http://wscg.zcu.cz/wscg2012/short/A29-full.pdf)<sup>[copy]({% link public/shared/beginner_dual_quats.pdf %})</sup>
+: What they are, how they work, and how to use them for 3D character hierarchies
+
+
+[Dual-Quaternions](http://www.xbdev.net/misc_demos/demos/dual_quaternions_beyond/paper.pdf)<sup>[copy]({% link public/shared/paper_dual-quats.pdf %})</sup>
+: From classical mechanics to computer graphics and beyond
 
 
 ## Bikes

@@ -39,6 +39,10 @@ body, html {
     margin-bottom: 1em;
 }
 
+.intro-text {
+    padding-left: 12em;
+}
+
 .highlight .s {
     color: #158c07;
 }
