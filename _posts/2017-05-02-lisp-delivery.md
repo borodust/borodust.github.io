@@ -256,8 +256,13 @@ information you need:
 (defun main (args)
   ;; load and parse configuration we passed as an argument to the executable
   (awesome-game:load-configuration (second args))
+  ;; optionally, one can extract current working directory with uiop
+  ;; if startup scripts (.sh or .bat) mentioned earlier are used
+  ;; it will return a directory that contains those scripts
+  (awesome-game:set-current-working-directory (uiop:getcwd))
   (awesome-game:initialize-world))
 ```
+
 
 Now put an executable, .sh or .bat script, assets and a configuration file into an archive and
 ***Ship it!***
