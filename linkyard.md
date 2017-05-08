@@ -20,6 +20,9 @@ root: true
 <http://lispgames.org>
 : Lisp gamedev resources
 
+[Delivering games written in Common Lisp]({{ site.baseurl }}{% post_url 2017-05-02-lisp-delivery %})
+: Guide to shipping Common Lisp applications while avoiding most annoying problems
+
 
 ## Math
 [A Beginners Guide to Dual-Quaternions](http://wscg.zcu.cz/wscg2012/short/A29-full.pdf)<sup>[copy]({% link public/shared/beginner_dual_quats.pdf %})</sup>
