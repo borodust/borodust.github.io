@@ -16,12 +16,6 @@ body, html {
     position: relative;
 }
 
-@media (min-width: 48em) {
-  .content-area {
-    max-width: 48rem;
-  }
-}
-
 .copyright-container {
     position: absolute;
     bottom: 0;
@@ -34,13 +28,12 @@ body, html {
 .intro-face-photo {
     border-radius: 50%;
     width: 10em;
-    float: left;
+    margin-top: 1em;
     margin-right: 2em;
     margin-bottom: 1em;
 }
 
 .intro-text {
-    padding-left: 12em;
 }
 
 .highlight .s {
@@ -56,5 +49,24 @@ ul {
 }
 
 .subpage-list {
+    text-align: right;
     list-style-type: none;
+}
+
+@media (min-width: 48em) {
+    .subpage-list {
+        text-align: initial;
+    }
+
+    .content-area {
+        max-width: 48rem;
+    }
+
+    .intro-face-photo {
+        float: left;
+    }
+
+    .intro-text {
+        padding-left: 12em;
+    }
 }
