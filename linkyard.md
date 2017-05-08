@@ -1,6 +1,8 @@
 ---
 layout: page
 title: Linkyard
+order: 95
+root: true
 ---
 
 * [Common Lisp](#common-lisp)

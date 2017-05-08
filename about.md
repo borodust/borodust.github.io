@@ -1,6 +1,8 @@
 ---
 layout: page
 title: About
+order: 99
+root: true
 ---
 <img src="{%link public/decent_face.jpg %}" class="intro-face-photo">
 

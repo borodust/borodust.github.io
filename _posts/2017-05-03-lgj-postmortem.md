@@ -19,7 +19,7 @@ about it here nevertheless.
   * [Games, Socks and Decision](2017-04-lgj-postmortem#games-socks-and-decision)
   * [Realization](2017-04-lgj-postmortem#realization)
   * [Plans](2017-04-lgj-postmortem#plans)
-* [Jam](2017-04-lgj-postmortem#jam)
+* [DevLog](2017-04-lgj-postmortem#devlog)
 * [Conclusion](2017-04-lgj-postmortem#conclusion)
 
 <!--excerpt-->
@@ -82,7 +82,7 @@ pita. But I thought I would have time to at least use single rigid body for crin
 death animation. I was wrong, but meh, extra is an extra: no regrets.
 
 
-## Jam
+## DevLog
 
 ### Apr 15, 2017
 #### [8a77603](https://github.com/borodust/mortar-combat/commit/8a77603) Initial commit

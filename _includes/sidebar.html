@@ -15,16 +15,27 @@
       <a class="sidebar-nav-item{% if page.url == rel_home %} active{% endif %}"
          href="{{ rel_home }}">Blog</a>
 
-      {% comment %}
-        The code below dynamically generates a sidebar nav of pages with
-        `layout: page` in the front-matter. See readme for usage.
-      {% endcomment %}
-
-      {% assign pages_list = site.pages %}
-      {% for node in pages_list %}
-        {% if node.title != null and node.layout == "page" %}
+      {% assign page_list = site.pages | sort:"order" %}
+      {% for node in page_list %}
+        {% if node.root != null %}
       <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}"
          href="{{ node.url }}">{{ node.title }}</a>
+          {% assign child_nodes = site.pages |
+              where_exp:"item","item.parent == node.id" |
+              sort:"order" %}
+          {% assign active_child  = child_nodes | where_exp:"item","item.url == page.url" %}
+          {% if child_nodes.size > 0 and (active_child.size > 0 or page.url == node.url)  %}
+      <ul class="subpage-list">
+            {% for child in child_nodes %}
+              {% if node.id != null and child.parent == node.id %}
+            <li>
+              <a class="sidebar-nav-item{% if page.url == child.url %} active{% endif %}"
+                 href="{{ child.url }}">{{ child.title }}</a>
+            </li>
+              {% endif %}
+            {% endfor %}
+      </ul>
+          {%endif %}
         {% endif %}
       {% endfor %}
     </nav>
