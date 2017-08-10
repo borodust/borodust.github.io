@@ -23,19 +23,22 @@
           {% assign child_nodes = site.pages |
               where_exp:"item","item.parent == node.id" |
               sort:"order" %}
-          {% assign active_child  = child_nodes | where_exp:"item","item.url == page.url" %}
-          {% if child_nodes.size > 0 and (active_child.size > 0 or page.url == node.url)  %}
+          {% assign active_child = child_nodes | where_exp:"item","item.url == page.url" | first %}
+          {% assign active_project_node = child_nodes | where_exp:"item","item.id != null"
+                                                      | where_exp:"item","item.id == page.project"
+                                                      | first %}
+          {% if child_nodes.size > 0 and (active_child != null or active_project_node != null or page.url == node.url) %}
       <ul class="subpage-list">
             {% for child in child_nodes %}
-              {% if node.id != null and child.parent == node.id %}
+              {% if node.id != null %}
             <li>
-              <a class="sidebar-nav-item{% if page.url == child.url %} active{% endif %}"
+              <a class="sidebar-nav-item{% if page.url == child.url or (child.id != null and child.id == active_project_node.id) %} active{% endif %}"
                  href="{{ child.url }}">{{ child.title }}</a>
             </li>
               {% endif %}
             {% endfor %}
       </ul>
-          {%endif %}
+          {% endif %}
         {% endif %}
       {% endfor %}
     </nav>

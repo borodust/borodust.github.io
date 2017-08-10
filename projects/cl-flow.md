@@ -1,74 +1,57 @@
 ---
 layout: page
+id: cl-flow
 title: cl-flow
 parent: projects
 ---
-Experimental data-flow driven concurrency library for Common Lisp.
+Experimental data-flow driven concurrency library for constructing computation trees in Common Lisp.
 
-GitHub repository: [cl-flow]({{ site.borodust.github }}/cl-flow)
+[GitHub]({{ site.borodust.github }}/cl-flow)
+
 
 ## Quick overview
 
-`>>` operator means forms it encloses gonna be executed serially, but possibly in different
-threads.
+`->` (`flow:atomically`) operator marks atomic block of code that could be dispatched
+concurrently.
 
-`~>` operator denotes forms that gonna be run in parallel.
+`>>` (`flow:serially`) operator encloses forms for them to be executed serially, but possibly in
+different threads, returning the value of the last atomic block or flow.
 
-`->` marks atomic block of code that can be dispatched concurrently.
+`~>` (`flow:concurrently`) operator denotes forms that are going to be run in parallel, returning
+list of form results in the same order they were specified.
 
-`->>` denotes gblock that generates new flow dynamically during parent flow execution. In other words, injects new dynamically created flow into current one.
+`->>` (`flow:dynamically`) denotes block that generates new flow dynamically during parent flow
+execution. In other words, injects new dynamically created flow into current one.
+
 
 Keywords in this examples denote invariants, so `->` block marked with the same invariant
 shouldn't be executed concurrently. But this must be enforced by dispatching function passed
 into `run-flow`.
 
-Code is fully asynchronous, no blocking required (see Memory Model note below). Results of
-previously executed block (denoted by `->`) "flow" into next code block and bound as arguments
-to this next block.
+Code is fully asynchronous and thread save with no blocking required (see Memory Model note
+below). Results of previously executed block (denoted by `->`) "flows" into a next code block
+and is bound as argument to this next block.
 
-At the end of the day, this approach is just glorified and syntactically sugared mix of promises
-and data-flow model.
+## Documentation
+[Getting started]({% link projects/cl-flow/getting-started.md %})
 
-
-```common_lisp
-(>> (-> :thread-0 ()
-      (this "will be executed first")
-      1)
-    (-> :thread-1 (arg)
-      (here "we will receive 1 from previous block as an argument" arg)))
-
-
-(>> (~> (-> :thread-0 ()
-          (this "will be executed in parallel")
-          "pa")
-        (-> :thread-1 ()
-          (with "this code")
-          "ral")
-        (-> :thread-2 ()
-          (and "this too")
-          "lel"))
-    (-> :any-thread (a b c)
-      (here "we will receive (\"pa\") (\"ral\") (\"lel\") as" a b c)
-      (in "exactly same order: order of results is preserved"
-          "even if the functions executed in paralel")))
-```
 
 ## Example
 
-```common_lisp
+```lisp
 (let ((out *standard-output*))
   (run-flow *dispatcher*
             (>> (~> (-> :tag-0 () "Hello")
                     (-> :tag-1 () ", concurrent"))
-                (-> :tag-2 (a b)
-                  (concatenate 'string (car a) (car b) " World!"))
+                (-> :tag-2 ((a b))
+                  (concatenate 'string a b " World!"))
                 (-> :tag-3 (text)
                   (print text out)))))
 ```
 
 ## Tests
 
-```common_lisp
+```lisp
 (ql:quickload :cl-flow/tests)
 (5am:run! :cl-flow-suite)
 ```
@@ -76,4 +59,5 @@ and data-flow model.
 ## NOTES
 - Experimental
 - Not extensively tested
-- There's no clearly defined memory model for CL, so there might be issues with cached thread-local non-volatile variables/memory.
+- There's no clearly defined memory model for CL, so there might be issues with cached
+  thread-local non-volatile variables/memory.
