@@ -33,7 +33,7 @@ below). Results of previously executed block (denoted by `->`) "flows" into a ne
 and is bound as argument to this next block.
 
 ## Documentation
-[Getting started]({% link projects/cl-flow/getting-started.md %})
+[Getting Started]({% link projects/cl-flow/getting-started.md %})
 
 
 ## Example
