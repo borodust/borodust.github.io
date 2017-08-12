@@ -4,10 +4,15 @@ id: cl-flow
 title: cl-flow
 parent: projects
 ---
-Experimental data-flow driven concurrency library for constructing computation trees in Common Lisp.
+
+Library for asynchonous non-blocking concurrency in Common Lisp. Quite similar to what green
+threads are for. In other buzzy words, it is a computation tree building library mixed with
+data-flow model for non-blocking, asynchronous and thread-safe execution.
 
 [GitHub]({{ site.borodust.github }}/cl-flow)
 
+## Documentation
+[Getting Started]({% link projects/cl-flow/getting-started.md %})
 
 ## Quick overview
 
@@ -32,9 +37,6 @@ Code is fully asynchronous and thread save with no blocking required (see Memory
 below). Results of previously executed block (denoted by `->`) "flows" into a next code block
 and is bound as argument to this next block.
 
-## Documentation
-[Getting Started]({% link projects/cl-flow/getting-started.md %})
-
 
 ## Example
 
@@ -56,7 +58,7 @@ and is bound as argument to this next block.
 (5am:run! :cl-flow-suite)
 ```
 
-## NOTES
+## Notes
 - Experimental
 - Not extensively tested
 - There's no clearly defined memory model for CL, so there might be issues with cached
