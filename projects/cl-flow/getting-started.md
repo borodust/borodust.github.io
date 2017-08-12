@@ -4,6 +4,14 @@ title: Getting Started with cl-flow
 project: cl-flow
 ---
 
+
+* [Setup](#setup)
+* [First steps](#first-steps)
+* [Concurrency](#concurrency)
+* [Shorthand syntax](#shorthand-syntax)
+* [Invariants](#invariants)
+
+
 ## Setup
 
 For this library to work, one would need to implement proper flow dispatcher, but, hopefully,
@@ -26,7 +34,11 @@ variables to run our flow:
 
 (defvar *output* *standard-output*)
 
-(defvar *dispatcher* (simple-flow-dispatcher:make-simple-dispatcher :threads 4))
+(defun print-error (e)
+  (format *output* "~A" e))
+
+(defvar *dispatcher* (simple-flow-dispatcher:make-simple-dispatcher :threads 4
+                                                                    :error-handler #'print-error))
 
 (defun run-flow (flow)
   (run *dispatcher* flow))
@@ -170,3 +182,76 @@ with `>>` and so on. We can rewrite one of our examples as such:
               (-> :default ((a b c))
                 (format *output* "~%~A, ~A ~A" a b c))))
 ```
+
+## Invariants
+As already mentioned, they exist to guard atomic blocks from concurrent execution where needed.
+One can imagine flow block to be a critical section that is guarded by mutex/lock, only there's
+no blocking involved - flow execution is purely non-blocking.
+
+For the sake of experiment, let's define some long running non-thread-safe incrementing function
+and required state:
+
+```common_lisp
+(defparameter *value* 0)
+
+(defun increment-global-variable ()
+  (let ((value *value*))
+    (sleep 0.1)
+    (setf *value* (1+ value))))
+```
+
+And a couple of flows that run this global-state-changing function:
+
+```common_lisp
+(defun fully-concurrent-flow ()
+  (~> (-> :one ()
+        (increment-global-variable))
+      (-> :two ()
+        (increment-global-variable))
+      (-> :three ()
+        (increment-global-variable))))
+
+
+(defun non-concurrent-flow ()
+  (~> (-> :one ()
+        (increment-global-variable))
+      (-> :one ()
+        (increment-global-variable))
+      (-> :one ()
+        (increment-global-variable))))
+```
+
+Now, you see those are different only by how invariants are used. `#'fully-concurrent-flow` has
+three invariants used: `:one`, `:two` and `:three`, while `#'non-concurrent-flow` is using
+`:one` only. Let's see what would happen when we run those!
+
+
+```common_lisp
+(setf *value* 0)
+(run-flow (fully-concurrent-flow))
+```
+
+Wait a second (or 0.1 of a second to be somewhat precise) and check the value of
+`*value*`... `1`. Huh? What happened is that all three blocks started executing concurrently
+running `#'increment-global-variable` all at once. So at the same time in different threads
+`#'increment-global-variable` cached 0 value of `*value*` in `value` variable and then, after
+0.1 second, tried to increment it, all setting `*value*` to 1. That's behavior is crappy and
+called a concurrent race: 3 same-time function invocations fought for one resource - `*value*`
+and failed to communicate, incorrectly updating the state.
+
+What will happen with another flow we defined? Let's find out.
+
+```common_lisp
+(setf *value* 0)
+(run-flow (non-concurrent-flow))
+```
+
+Hold on a moment (yes, 0.3 of a second, you already guessed it right) and recheck what we have
+in `*value*`. `3`. Woah! What happened now? We started executing `#'increment-global-variable`
+three times concurrently as in our previous attempt, but dispatcher figured out they cannot be
+run as such by checking their invariant, which is `:one` for all of the blocks, so it scheduled
+them to run one after another - serially, that is, so global state was correctly updated each
+time!
+
+In some way, this flow execution was similar to what `flow:serially` does, only the order of
+block execution is not guaranteed.
