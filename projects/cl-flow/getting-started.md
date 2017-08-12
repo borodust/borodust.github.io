@@ -254,5 +254,5 @@ run as such by checking their invariant, which is `:one` for all of the blocks, 
 them to run one after another - serially that is, so global state was correctly updated each
 time!
 
-In some way, this flow execution was similar to what `flow:serially` does, only the order of
-block execution is not guaranteed.
+In some way, this flow run was similar to what `flow:serially` does, only the execution order of
+blocks is not guaranteed.

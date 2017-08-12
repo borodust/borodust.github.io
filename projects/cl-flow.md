@@ -42,6 +42,18 @@ and is bound as argument to this next block.
 
 See [Getting Started]({% link projects/cl-flow/getting-started.md %}) page.
 
+## Compatibility
+For thread-safety `cl-flow` library uses lock-free atomic functions not defined in CL standard
+and, unfortunately, not widely supported by implementations either. This said, `cl-flow` is
+actually tested and known to work in:
+
+* SBCL x86_64
+* CCL x86_64
+
+Not tested for, but exptected to work in:
+
+* Lispworks 64-bit
+
 ## Notes
 - Experimental
 - Not extensively tested
