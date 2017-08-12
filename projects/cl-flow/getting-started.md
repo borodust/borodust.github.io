@@ -37,8 +37,9 @@ variables to run our flow:
 (defun print-error (e)
   (format *output* "~A" e))
 
-(defvar *dispatcher* (simple-flow-dispatcher:make-simple-dispatcher :threads 4
-                                                                    :error-handler #'print-error))
+(defvar *dispatcher* (simple-flow-dispatcher:make-simple-dispatcher
+                      :threads 4
+                      :error-handler #'print-error))
 
 (defun run-flow (flow)
   (run *dispatcher* flow))
@@ -200,7 +201,7 @@ and required state:
     (setf *value* (1+ value))))
 ```
 
-And a couple of flows that run this global-state-changing function:
+And a couple of flows that call this global-state-changing function:
 
 ```common_lisp
 (defun fully-concurrent-flow ()
@@ -235,8 +236,8 @@ Wait a second (or 0.1 of a second to be somewhat precise) and check the value of
 `*value*`... `1`. Huh? What happened is that all three blocks started executing concurrently
 running `#'increment-global-variable` all at once. So at the same time in different threads
 `#'increment-global-variable` cached 0 value of `*value*` in `value` variable and then, after
-0.1 second, tried to increment it, all setting `*value*` to 1. That's behavior is crappy and
-called a concurrent race: 3 same-time function invocations fought for one resource - `*value*`
+0.1 second, tried to increment it, all setting `*value*` to 1. That behavior is crappy and
+called a concurrent race: 3 same-time function invocations fought for one resource - `*value*`,
 and failed to communicate, incorrectly updating the state.
 
 What will happen with another flow we defined? Let's find out.
@@ -247,10 +248,10 @@ What will happen with another flow we defined? Let's find out.
 ```
 
 Hold on a moment (yes, 0.3 of a second, you already guessed it right) and recheck what we have
-in `*value*`. `3`. Woah! What happened now? We started executing `#'increment-global-variable`
+in `*value*`: `3`. Woah! What happened now? We started executing `#'increment-global-variable`
 three times concurrently as in our previous attempt, but dispatcher figured out they cannot be
 run as such by checking their invariant, which is `:one` for all of the blocks, so it scheduled
-them to run one after another - serially, that is, so global state was correctly updated each
+them to run one after another - serially that is, so global state was correctly updated each
 time!
 
 In some way, this flow execution was similar to what `flow:serially` does, only the order of

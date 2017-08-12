@@ -5,7 +5,9 @@ title: cl-flow
 parent: projects
 ---
 
-Library for asynchonous non-blocking concurrency in Common Lisp. Quite similar to what green
+## Quick overview
+
+Library for asynchronous non-blocking concurrency in Common Lisp. Quite similar to what green
 threads are for. In other buzzy words, it is a computation tree building library mixed with
 data-flow model for non-blocking, asynchronous and thread-safe execution.
 
@@ -14,7 +16,7 @@ data-flow model for non-blocking, asynchronous and thread-safe execution.
 ## Documentation
 [Getting Started]({% link projects/cl-flow/getting-started.md %})
 
-## Quick overview
+## Operators
 
 `->` (`flow:atomically`) operator marks atomic block of code that could be dispatched
 concurrently.
@@ -28,35 +30,17 @@ list of form results in the same order they were specified.
 `->>` (`flow:dynamically`) denotes block that generates new flow dynamically during parent flow
 execution. In other words, injects new dynamically created flow into current one.
 
+`%>` (`flow:asynchronously`) allows to split the flow and continue or interrupt its execution at
+later time by calling `#'continue-flow` or `#'interrupt-flow` functions.
 
-Keywords in this examples denote invariants, so `->` block marked with the same invariant
-shouldn't be executed concurrently. But this must be enforced by dispatching function passed
-into `run-flow`.
-
-Code is fully asynchronous and thread save with no blocking required (see Memory Model note
+Code is fully asynchronous and thread-safe with no blocking required (see Memory Model note
 below). Results of previously executed block (denoted by `->`) "flows" into a next code block
 and is bound as argument to this next block.
 
 
 ## Example
 
-```lisp
-(let ((out *standard-output*))
-  (run-flow *dispatcher*
-            (>> (~> (-> :tag-0 () "Hello")
-                    (-> :tag-1 () ", concurrent"))
-                (-> :tag-2 ((a b))
-                  (concatenate 'string a b " World!"))
-                (-> :tag-3 (text)
-                  (print text out)))))
-```
-
-## Tests
-
-```lisp
-(ql:quickload :cl-flow/tests)
-(5am:run! :cl-flow-suite)
-```
+See [Getting Started]({% link projects/cl-flow/getting-started.md %}) page.
 
 ## Notes
 - Experimental
