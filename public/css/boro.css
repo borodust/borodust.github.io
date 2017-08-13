@@ -36,6 +36,11 @@ body, html {
 .intro-text {
 }
 
+.highlight {
+    overflow-x: auto;
+    white-space: pre;
+}
+
 .highlight .s {
     color: #158c07;
 }
