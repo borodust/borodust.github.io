@@ -233,9 +233,9 @@ mouse cursor changes it's location.
 ## Assets
 
 We need a couple of resources prepared to continue with this guide. Download [this]({% link
-public/snake-head.png %})[^1] image and [this]({% link public/snake-grab.ogg %})[^2] sound file to
-`/tmp/hello-gamekit-assets/`. Now let's tell gamekit where to find those with `:resource-path`
-property of `gamekit-system`.
+public/snake-head.png %}) (right click on the link -> save as) image[^1] and [this]({% link
+public/snake-grab.ogg %}) sound file[^2] to `/tmp/hello-gamekit-assets/`. Now let's tell gamekit
+where to find those with `:resource-path` property of `gamekit-system`.
 
 ```common_lisp
 (defclass hello-gamekit (gamekit:gamekit-system) ()
