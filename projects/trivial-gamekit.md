@@ -12,6 +12,12 @@ This library is intended for users who wish to start with game development in Co
 soon as possible without much configuration hassle.
 
 
+## Source code
+
+`trivial-gamekit` sources can be found in GitHub
+[repository](https://github.com/borodust/trivial-gamekit).
+
+
 ## Requirements
 
 * [Quicklisp](https://www.quicklisp.org)

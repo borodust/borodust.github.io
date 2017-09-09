@@ -147,7 +147,7 @@ moving box into a sinus snake!
                       :thickness 5.0))
 ```
 
-Well, people want beleive us it is a snake, so I guess we need to leave a note for them to not
+Well, people won't beleive us it is a snake, so I guess we need to leave a note for them to not
 confuse it for bezier curve with animated control points!
 
 ```common_lisp
@@ -164,7 +164,7 @@ confuse it for bezier curve with animated control points!
 ```
 
 `#'gamekit:print-text` allows us to print a text onto the screen. Gamekit is able to ouput only
-a limited set of glyphs, unfortunately. Only english, cyrillic and some special glyphs are
+a limited set of glyphs, unfortunately. Only latin, cyrillic and some special glyphs are
 supported at this moment.
 
 Anyway, quite a cringy snake, but it moves! We couldn't ask for more.
@@ -329,90 +329,10 @@ Try to grab a snake's head now. Amazing sound!
 
 ## Result
 
-Let's combine all our efforts into a single batch of code you can paste into the REPL and start
-playing with `trivial-gamekit` instantly!
+All snippets combined could be found in `hello-gamekit` GitHub
+[repository](https://github.com/borodust/hello-gamekit). Clone it or fork it and start playing
+with `trivial-gamekit` any moment!
 
-```common_lisp
-;;;
-;;; Some state we need
-;;;
-(defvar *canvas-width* 800)
-(defvar *canvas-height* 600)
-(defvar *black* (gamekit:vec4 0 0 0 1))
-(defvar *head-grabbed-p* nil)
-(defvar *curve* (make-array 4 :initial-contents (list (gamekit:vec2 300 300)
-                                                      (gamekit:vec2 375 300)
-                                                      (gamekit:vec2 425 300)
-                                                      (gamekit:vec2 500 300))))
-
-;;;
-;;; Main class we use to run our application
-;;;
-(defclass hello-gamekit (gamekit:gamekit-system) ()
-  (:default-initargs
-   :resource-path "/tmp/hello-gamekit-assets/"
-   :viewport-width *canvas-width*
-   :viewport-height *canvas-height*
-   :viewport-title "Hello Gamekit!"))
-
-
-;;;
-;;; Here we initialize resources we saved in /tmp/hello-gamekit-assets/
-;;; directory
-;;;
-(defmethod gamekit:initialize-resources ((app hello-gamekit))
-  (gamekit:import-image :snake-head "snake-head.png")
-  (gamekit:import-sound :snake-grab "snake-grab.ogg"))
-
-
-;;;
-;;; Every time system starts, we need to rebind actions
-;;;
-(defmethod gamekit:post-initialize ((app hello-gamekit))
-  (gamekit:bind-cursor (lambda (x y)
-                       "When left mouse button is pressed, update snake's head position"
-                       (when *head-grabbed-p*
-                         (let ((head-position (aref *curve* 3)))
-                           (setf (gamekit:x head-position) x
-                                 (gamekit:y head-position) y)))))
-
-  (gamekit:bind-button :mouse-left :pressed
-                       (lambda ()
-                         (gamekit:play :snake-grab)
-                         (setf *head-grabbed-p* t)))
-
-  (gamekit:bind-button :mouse-left :released
-                       (lambda () (setf *head-grabbed-p* nil))))
-
-
-(defun real-time-seconds ()
-  "Return seconds since certain point of time"
-  (/ (get-internal-real-time) internal-time-units-per-second))
-
-(defun update-position (position time)
-  (let* ((subsecond (nth-value 1 (truncate time)))
-         (angle (* 2 pi subsecond)))
-    (setf (gamekit:y position) (+ 300 (* 100 (sin angle))))))
-
-
-;;;
-;;; All the drawing should happend in this method
-;;;
-(defmethod gamekit:draw ((app hello-gamekit))
-  (gamekit:print-text "A snake that is!" 300 400)
-  (update-position (aref *curve* 1) (real-time-seconds))
-  (update-position (aref *curve* 2) (+ 0.1 (real-time-seconds)))
-  (gamekit:draw-curve (aref *curve* 0)
-                      (aref *curve* 3)
-                      (aref *curve* 1)
-                      (aref *curve* 2)
-                      *black*
-                      :thickness 5.0)
-  ;; let's center image position properly first
-  (let ((head-image-position (gamekit:subt (aref *curve* 3) (gamekit:vec2 32 32))))
-    ;; then draw it where it belongs
-    (gamekit:draw-image head-image-position :snake-head)))
-```
 
 
 ***
