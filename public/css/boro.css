@@ -1,5 +1,37 @@
 body, html {
     height: 100%;
+    background-color: #2b2b2b;
+    color: #dadada;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: .5rem;
+    font-weight: bold;
+    line-height: 1.25;
+    color: #dcdcdc;
+    text-rendering: optimizeLegibility;
+}
+
+.page-title, .post-title, .post-title a {
+    color: #dcdcdc;
+}
+
+code {
+    color: #b15f67;
+    background-color: #353535;
+}
+
+a {
+    color: #d8ba42;
+}
+
+.related-posts li a:hover {
+  color: #ffe064;
+  text-decoration: none;
+}
+
+strong {
+    color: #e6e6e6;
 }
 
 .social-media-row {
@@ -34,19 +66,6 @@ body, html {
 }
 
 .intro-text {
-}
-
-.highlight {
-    overflow-x: auto;
-    white-space: pre;
-}
-
-.highlight .s {
-    color: #158c07;
-}
-
-.highlight .ss {
-    color: #e06b06;
 }
 
 p {
