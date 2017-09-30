@@ -5,7 +5,7 @@ parent: projects
 ---
 
 Experimental **bod**acious[^1] **g**ame **e**ngine written in Common Lisp - a tool for exploring
-virtual worlds from the inside.
+virtual worlds from within.
 
 GitHub repository: [cl-bodge]({{ site.borodust.github }}/cl-bodge)
 

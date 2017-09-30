@@ -162,7 +162,7 @@ implement it.
 #### [c66234e](https://github.com/borodust/mortar-combat/commit/c66234e) Async networking with cl-flow
 
 Server instance I had to serve as a medium for game communications was not particularly
-performat one: single-cored 2GHz with 512Mb RAM. Not much resources to
+performat one: single-core 2GHz with 512Mb RAM. Not much resources to
 spare. Blocking/synchronous approach wasn't much of an option, so I went straight with
 asynchronous code.
 
