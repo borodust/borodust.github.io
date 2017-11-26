@@ -22,7 +22,7 @@ soon as possible without much configuration hassle.
 
 * [Quicklisp](https://www.quicklisp.org)
 * OpenGL 3.3+
-* 64-bit (x86_64) Windows, GNU/Linux or macOS
+* x86_64 Windows, GNU/Linux or macOS
 * x86_64 SBCL or CCL
 
 
@@ -45,10 +45,10 @@ soon as possible without much configuration hassle.
 ## Example
 
 ```common_lisp
-(defclass example (gamekit:gamekit-system) ())
+(gamekit:defgame example () ())
 
 (defmethod gamekit:draw ((this example))
-  (gamekit:print-text "Hello, Gamedev!" 240.0 240.0))
+  (gamekit:draw-text "Hello, Gamedev!" (gamekit:vec2 240.0 240.0)))
 
 (gamekit:start 'example)
 ```
@@ -56,9 +56,9 @@ soon as possible without much configuration hassle.
 
 ## Help
 
-Unfortunately, technology behind `trivial-gamekit` is quite fragile, unstable and highly
-dependent on the target OS configuration. Things break. Feel free to contact me when that
-happens with `trivial-gamekit` system and we will try to figure out something together!
+Things break and `trivial-gamekit` is no exception. Feel free to fire an
+[issue](https://github.com/borodust/trivial-gamekit/issues) when that happens and
+we will try to figure out a solution together!
 
-You can find me and awesome `#lispgames` community chatting on `#lispgames` channel at
+Also you can find me and awesome `#lispgames` community chatting on `#lispgames` channel at
 `irc://chat.freenode.net`.
