@@ -156,6 +156,14 @@ process.
 
 ## Listening to input
 
+There's no game without some sort of interaction with a player. `gamekit` allows you to grab
+keyboard and mouse input to listen for player actions. You can pass a callback to
+[`#'bind-button`](#gamekit-bind-button) which will be called upon pressing or releasing
+keyboard/mouse buttons. Callback passed to [`#'bind-cursor`](#gamekit-bind-cursor) is going to
+be invoked when user moves a mouse. Callbacks provided are not stacked together, meaning if you
+try to bind multiple callbacks to the same button only last callback is actually going to be
+used. Same goes for cursor input.
+
 #### Related symbols
 
 {% include_relative ref/listening-to-input.md %}
