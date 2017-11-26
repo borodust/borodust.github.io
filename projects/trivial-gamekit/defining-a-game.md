@@ -1,8 +1,6 @@
-*macro* ***`defgame`*** `(name (&rest classes) ((&rest slots) &rest opts))`
+*macro* ***`defgame`*** `(name (&rest classes) &body ((&rest slots) &rest opts))`
 {: #gamekit-defgame}
-
 <div class="bodge-docstring" markdown="block">
-
 Defines a game class that can be passed to [`#'start`](#gamekit-start) to run a game. `name` is
 the name of a class generated. `classes` are names of superclasses, `slots` - standard class
 slots and `opts` are class options. So, pretty much standard class definition except it does
@@ -33,12 +31,9 @@ Example:
 ```
 </div>
 
-
-*function* ***`start`*** `(classname &key)`
+*function* ***`start`*** `(classname &key (log-level info) (opengl-version '(3 3)) blocking)`
 {: #gamekit-start}
-
 <div class="bodge-docstring" markdown="block">
-
 Bootsraps a game allocating a window and other system resources. Instantiates game object
 defined with [`defgame`](#gamekit-defgame) which can be obtained via
 [`#'gamekit`](#gamekit-gamekit). Cannot be called twice - [`#'stop`](#gamekit-stop) should be
@@ -51,12 +46,9 @@ Example:
 ```
 </div>
 
-
 *function* ***`stop`*** `()`
 {: #gamekit-stop}
-
 <div class="bodge-docstring" markdown="block">
-
 Stops currently running game releasing acquired resources.
 
 Example:
@@ -67,7 +59,6 @@ Example:
 
 *function* ***`gamekit`*** `()`
 {: #gamekit-gamekit}
-
 <div class="bodge-docstring" markdown="block">
 Returns instance of a running game or `nil` if no game is started yet.
 
@@ -76,3 +67,4 @@ Example:
 (gamekit:gamekit)
 ```
 </div>
+
