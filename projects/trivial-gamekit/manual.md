@@ -21,6 +21,7 @@ Template for function references:
 * [Playing an audio](#playing-an-audio)
 * [Listening to input](#listening-to-input)
 * [Building a distributable](#building-a-distributable)
+* [Symbol Index](#symbol-index)
 
 
 ## Overview
@@ -48,13 +49,9 @@ need to stop game execution. To stop a running game you would need to call
 [`#'stop`](#gamekit-stop).
 
 [`#'start`](#gamekit-start) also invokes a default game loop. To hook into it you can use
-[`#'act`](#'gamekit-act) and [`#'draw`](#gamekit-draw) methods. [`#'act`](#'gamekit-act) is used
+[`#'act`](#gamekit-act) and [`#'draw`](#gamekit-draw) methods. [`#'act`](#gamekit-act) is used
 for any activity you need to do per frame except drawing where [`#'draw`](#gamekit-draw) should
 be used exclusively for drawing/rendering.
-
-#### Related symbols
-
-{% include_relative ref/defining-a-game.md %}
 
 ## Math
 
@@ -70,10 +67,6 @@ Some vector operations are exported: [`#'mult`](#gamekit-) for element-wise mult
 Element accessor methods for setting or getting values out of vectors are also exported:
 [`#'x`](#gamekit-x) to access first element, [`#'y`](#gamekit-y) for a second,
 [`#'z`](#gamekit-z) - third and [`#'w`](#gamekit-w) to access fourth.
-
-#### Related symbols
-
-{% include_relative ref/math.md %}
 
 ## Locating resources
 
@@ -117,10 +110,6 @@ immediately for you to be notified later with [`#'notice-resources`](#gamekit-no
 This is useful, when you don't want to wait until all assets are loaded and start rendering some
 loading or start screen right away and continue with game after all resources are ready.
 
-#### Related symbols
-
-{% include_relative ref/locating-resources.md %}
-
 ## Drawing
 
 `gamekit` provides simple to use but versatile drawing API. If you know how HTML5 canvas API is
@@ -139,20 +128,12 @@ dynamic extent of its body. This means that upon returning from the macro canvas
 state will be returned to its original state before the macro and all transformation operations
 inside its body were canceled out.
 
-#### Related symbols
-
-{% include_relative ref/drawing.md %}
-
 ## Playing an audio
 
 Audio can substantially boost game atmosphere, and `gamekit` is ready to serve you well in this
 regard too. [`#'play-sound`](#gamekit-play-sound) will help with getting sounds to reach your
 users ears. On the other hand, [`#'stop-sound`](#gamekit-stop-sound) can be used to stop this
 process.
-
-#### Related symbols
-
-{% include_relative ref/playing-an-audio.md %}
 
 ## Listening to input
 
@@ -163,10 +144,6 @@ keyboard/mouse buttons. Callback passed to [`#'bind-cursor`](#gamekit-bind-curso
 be invoked when user moves a mouse. Callbacks provided are not stacked together, meaning if you
 try to bind multiple callbacks to the same button only last callback is actually going to be
 used. Same goes for cursor input.
-
-#### Related symbols
-
-{% include_relative ref/listening-to-input.md %}
 
 ## Building a distributable
 
@@ -180,6 +157,13 @@ For building these packages for `Windows`, `GNU/Linux` and `macOS` with just a s
 `github` or `gitlab` respository check out [Advanced Features]({% link
 projects/trivial-gamekit/advanced.md %}) section.
 
-#### Related symbols
+## Symbol Index
+{% include_relative ref/symbol-index.md %}
 
+{% include_relative ref/defining-a-game.md %}
+{% include_relative ref/math.md %}
+{% include_relative ref/locating-resources.md %}
+{% include_relative ref/drawing.md %}
+{% include_relative ref/playing-an-audio.md %}
+{% include_relative ref/listening-to-input.md %}
 {% include_relative ref/building-a-distributable.md %}

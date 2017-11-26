@@ -31,7 +31,6 @@ soon as possible without much configuration hassle.
 * [Getting Started]({% link projects/trivial-gamekit/getting-started.md %})
 * [User Manual]({% link projects/trivial-gamekit/manual.md %})
 * [Advanced Features]({% link projects/trivial-gamekit/advanced.md %})
-* [Symbol Index]({% link projects/trivial-gamekit/symbol-index.md %})
 
 
 ## Installation and loading

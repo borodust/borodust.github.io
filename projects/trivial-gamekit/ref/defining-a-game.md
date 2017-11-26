@@ -19,14 +19,14 @@ to `t`.
 Example:
 
 ```common_lisp
-(gamekit:defgame notalone ()
+(gamekit:defgame example ()
   ;; some game related state
   ((world :initform (make-instance 'world))
    (game-state))
   ;; options
   (:viewport-width 800)
   (:viewport-height 600)
-  (:viewport-title "NOTALONE")
+  (:viewport-title "EXAMPLE")
   (:prepare-resources nil))
 ```
 </div>
@@ -42,7 +42,7 @@ called first before running `start` again.
 Example:
 
 ```common_lisp
-(gamekit:start 'notalone)
+(gamekit:start 'example)
 ```
 </div>
 
@@ -71,12 +71,27 @@ Example:
 *generic* ***`act`*** `(system)`
 {: #gamekit-act}
 <div class="bodge-docstring" markdown="block">
+Called every game loop iteration for user to add
+any per-frame behavior to the game. NOTE: all drawing operations should
+be performed in [`#'draw`](#gamekit-draw) method.
 
+Example:
+```common_lisp
+(defmethod gamekit:act ((this example))
+  (report-fps))
+```
 </div>
 
 *generic* ***`draw`*** `(system)`
 {: #gamekit-draw}
 <div class="bodge-docstring" markdown="block">
+Called every game loop iteration for frame rendering.
+All drawing operations should be performed in this method.
 
+Example:
+```common_lisp
+(defmethod gamekit:draw ((this example))
+  (gamekit:draw-text "Hello, Gamedev!" (gamekit:vec2 10 10)))
+```
 </div>
 
