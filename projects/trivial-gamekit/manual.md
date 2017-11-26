@@ -121,7 +121,6 @@ loading or start screen right away and continue with game after all resources ar
 
 {% include_relative ref/locating-resources.md %}
 
-
 ## Drawing
 
 `gamekit` provides simple to use but versatile drawing API. If you know how HTML5 canvas API is
@@ -140,12 +139,16 @@ dynamic extent of its body. This means that upon returning from the macro canvas
 state will be returned to its original state before the macro and all transformation operations
 inside its body were canceled out.
 
-
 #### Related symbols
 
 {% include_relative ref/drawing.md %}
 
 ## Playing an audio
+
+Audio can substantially boost game atmosphere, and `gamekit` is ready to serve you well in this
+regard too. [`#'play-sound`](#gamekit-play-sound) will help with getting sounds to reach your
+users ears. On the other hand, [`#'stop-sound`](#gamekit-stop-sound) can be used to stop this
+process.
 
 #### Related symbols
 
