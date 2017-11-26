@@ -170,6 +170,16 @@ used. Same goes for cursor input.
 
 ## Building a distributable
 
+Sharing a Common Lisp game in a binary form amongst users was always a bit of pain. But fear no
+more! `gamekit` includes a mechanism for delivering your game packaged using only a single
+function - [`#'deliver`](#gamekit-deliver). It will build an executable, pack all used
+resources, copy required foreign libraries used by `trivial-gamekit` and compress all that into
+a shippable archive.
+
+For building these packages for `Windows`, `GNU/Linux` and `macOS` with just a single push to a
+`github` or `gitlab` respository check out [Advanced Features]({% link
+projects/trivial-gamekit/advanced.md %}) section.
+
 #### Related symbols
 
 {% include_relative ref/building-a-distributable.md %}
