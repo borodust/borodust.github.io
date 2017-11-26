@@ -117,12 +117,29 @@ immediately for you to be notified later with [`#'notice-resources`](#gamekit-no
 This is useful, when you don't want to wait until all assets are loaded and start rendering some
 loading or start screen right away and continue with game after all resources are ready.
 
-
 #### Related symbols
 
 {% include_relative ref/locating-resources.md %}
 
+
 ## Drawing
+
+`gamekit` provides simple to use but versatile drawing API. If you know how HTML5 canvas API is
+organized you will find `gamekit`'s one quite similar. Several functions with names starting
+with `draw-` exists to help you draw primitives like lines, rectangles, ellipses, arcs, polygons
+or even bezier curves. Images can be drawn via [`#'draw-image`](#gamekit-draw-image) and text
+with customizable font can be put onto canvas via [`#'draw-text`](#gamekit-draw-text).
+
+Canvas transformation operations are supported too. You can scale, translate, rotate a canvas
+with [`#'scale-canvas`](#gamekit-scale-canvas),
+[`#'translate-canvas`](#gamekit-translate-canvas) and
+[`#'rotate-canvas`](#gamekit-rotate-canvas) accordingly. If you need to keep canvas state for
+nested drawing operations you will appreciate presence of
+[`#'with-pushed-canvas`](#gamekit-with-pushed-canvas) macro, that keeps canvas state to the
+dynamic extent of its body. This means that upon returning from the macro canvas transformation
+state will be returned to its original state before the macro and all transformation operations
+inside its body were canceled out.
+
 
 #### Related symbols
 
