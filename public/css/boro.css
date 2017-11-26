@@ -98,3 +98,7 @@ ul {
         padding-left: 12em;
     }
 }
+
+.bodge-docstring {
+    padding-left: 3em;
+}
