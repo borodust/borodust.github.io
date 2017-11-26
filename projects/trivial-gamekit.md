@@ -28,7 +28,9 @@ soon as possible without much configuration hassle.
 
 ## Documentation
 
-[Getting Started]({% link projects/trivial-gamekit/getting-started.md %})
+* [Getting Started]({% link projects/trivial-gamekit/getting-started.md %})
+* [User Manual]({% link projects/trivial-gamekit/manual.md %})
+* [Advanced features]({% link projects/trivial-gamekit/manual.md %})
 
 
 ## Installation and loading
