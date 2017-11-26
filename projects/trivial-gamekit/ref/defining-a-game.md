@@ -68,3 +68,15 @@ Example:
 ```
 </div>
 
+*generic* ***`act`*** `(system)`
+{: #gamekit-act}
+<div class="bodge-docstring" markdown="block">
+
+</div>
+
+*generic* ***`draw`*** `(system)`
+{: #gamekit-draw}
+<div class="bodge-docstring" markdown="block">
+
+</div>
+

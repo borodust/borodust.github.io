@@ -4,6 +4,13 @@ title: User Manual
 project: trivial-gamekit
 ---
 
+{% comment %}
+
+Template for function references:
+[`#'`](#gamekit-)
+
+{% endcomment %}
+
 ## Contents
 
 * [Overview](#overview)
@@ -40,19 +47,101 @@ calling [`#'start`](#gamekit-start) for the same or different game objects is di
 need to stop game execution. To stop a running game you would need to call
 [`#'stop`](#gamekit-stop).
 
-### Related symbols
+[`#'start`](#gamekit-start) also invokes a default game loop. To hook into it you can use
+[`#'act`](#'gamekit-act) and [`#'draw`](#gamekit-draw) methods. [`#'act`](#'gamekit-act) is used
+for any activity you need to do per frame except drawing where [`#'draw`](#gamekit-draw) should
+be used exclusively for drawing/rendering.
 
-{% include_relative defining-a-game.md %}
+#### Related symbols
 
+{% include_relative ref/defining-a-game.md %}
 
 ## Math
 
+For moving objects around, defining their place on a canvas and giving them a color we need a
+bit of a math applied. `gamekit` points and positions are represented as two-dimensional vectors
+created with [`#'vec2`](#gamekit-vec2). Colors consist of four elements: red, green, blue and
+alpha, so they are represented by four-dimensional vecors created via [`#'vec4`](#gamekit-vec4).
+
+Some vector operations are exported: [`#'mult`](#gamekit-) for element-wise multiplication,
+[`#'add`](#gamekit-add) for addition, [`#'subt`](#gamekit-subt) for subtraction and
+[`#'div`](#gamekit-div) for element-wise division.
+
+Element accessor methods for setting or getting values out of vectors are also exported:
+[`#'x`](#gamekit-x) to access first element, [`#'y`](#gamekit-y) for a second,
+[`#'z`](#gamekit-z) - third and [`#'w`](#gamekit-w) to access fourth.
+
+#### Related symbols
+
+{% include_relative ref/math.md %}
+
 ## Locating resources
+
+Resources are very important for games. Textures, models, sounds, fonts, animations, tiles - you
+name it. `gamekit` has several routines prepared for you to ease the handling of those.
+
+First of all, we need to tell `gamekit` where to find resources. `gamekit` resources are
+associated with Common Lisp packages. Any package can have associated filesystem directory to
+find resources in. Call [`#'register-resource-package`](#gamekit-register-resource-package) as a
+toplevel form to bind a directory to a package. Absolute paths required here. Below I'll try to
+explain why we need this resource-directory association.
+
+Before diving deeper, lets see how resources are defined. You tell `gamekit` what resources to
+load and use via [`#'define-image`](#gamekit-define-image),
+[`#'define-sound`](#gamekit-define-sound) or [`#'define-font`](#gamekit-define-font) macros.
+First argument is a symbol that would become an identificator for the resource and the second
+argument is a relative path to the resource.
+
+Now, when `gamekit` knows absolute path to root and relative paths to resouces, it can locate
+and prepare them to use in a game. To find absolute path to a resource `gamekit` looks into its
+id and extracts the package (resource identificators must be symbols), then searches for
+registered package-directory association and extracts absolute path for the package from there
+and finally `gamekit` combines absolute path of a package with resource relative path and can
+totally locate it.
+
+This seemingly confusing mechanism was implemented for several games to coexist in one lisp
+image. Unless you use keywords or common packages like `:cl-user`, resources are going to be
+uniquely identified and each game will load its own resources correctly. Another usage scenario is
+an `asdf` system with just a resources and their definitions for sharing between fellow game
+developers.
+
+Resources are used by functions that requires them to operate, like
+[`#'draw-image`](#gamekit-draw-image), [`#'make-font`](#gamekit-make-font),
+[`#'play-sound`](#gamekit-play-sound) and others.
+
+When [`defgame`](#gamekit-defgame) option `:prepare-resources` is set to `nil`, you would need
+to request resources manually by calling [`#'prepare-resources`](#gamekit-prepare-resources)
+with resource ids you need. Preparation can take a while, so
+[`#'prepare-resources`](#gamekit-prepare-resources) asynchonously requests resources and returns
+immediately for you to be notified later with [`#'notice-resources`](#gamekit-notice-resources).
+This is useful, when you don't want to wait until all assets are loaded and start rendering some
+loading or start screen right away and continue with game after all resources are ready.
+
+
+#### Related symbols
+
+{% include_relative ref/locating-resources.md %}
 
 ## Drawing
 
+#### Related symbols
+
+{% include_relative ref/drawing.md %}
+
 ## Playing an audio
+
+#### Related symbols
+
+{% include_relative ref/playing-an-audio.md %}
 
 ## Listening to input
 
+#### Related symbols
+
+{% include_relative ref/listening-to-input.md %}
+
 ## Building a distributable
+
+#### Related symbols
+
+{% include_relative ref/building-a-distributable.md %}
