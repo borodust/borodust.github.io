@@ -10,7 +10,8 @@ resources can be found.
 
 Example:
 ```common_lisp
-(gamekit:register-resource-package :example-package "/home/gamdev/example-game/assets/")
+(gamekit:register-resource-package :example-package
+                                   "/home/gamdev/example-game/assets/")
 ```
 </div>
 
@@ -96,7 +97,10 @@ resource autoloading.
 
 Example:
 ```common_lisp
-(gamekit:prepare-resources (gamekit:gamekit) 'example-package::noto-sans 'example-package::blop 'example-package::logo)
+(gamekit:prepare-resources (gamekit:gamekit)
+                           'example-package::noto-sans
+                           'example-package::blop
+                           'example-package::logo)
 ```
 </div>
 

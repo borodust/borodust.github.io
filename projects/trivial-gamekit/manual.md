@@ -128,6 +128,16 @@ dynamic extent of its body. This means that upon returning from the macro canvas
 state will be returned to its original state before the macro and all transformation operations
 inside its body were canceled out.
 
+**All** drawing operations should be performed inside [`#'draw`](#gamekit-draw).
+
+Unlike many other drawing APIs `gamekit` uses bottom left corner as an origin (0,0) with y-axis
+pointing upwards which is more convenient mathematically.
+
+All origins or positions are represented by two-dimensional (x,y) vectors created via
+[`#'vec2`](#gamekit-vec2). Colors are passed around as four-dimensional vectors made with
+[`#'vec4`](#gamekit-vec4) consisting of red, green, blue and alpha channels each within 0.0-1.0
+range.
+
 ## Playing an audio
 
 Audio can substantially boost game atmosphere, and `gamekit` is ready to serve you well in this
