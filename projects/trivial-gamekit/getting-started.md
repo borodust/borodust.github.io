@@ -19,11 +19,11 @@ First we need to install `trivial-gamekit` system. This is quite easy to accompl
 
 ### Starting up
 
-Now, when system is successfully loaded, let's define a main class that will manage our
+Now, when the system is successfully loaded, let's define a main class that will manage our
 application:
 
 ```common_lisp
-(defclass hello-gamekit (gamekit:gamekit-system) ())
+(gamekit:defgame hello-gamekit () ())
 ```
 
 Yes. That's it. You totally configured an application that will use OpenGL graphics, OpenAL
@@ -48,18 +48,17 @@ UI or with
 
 ### Window configuration
 
-`trivial-gamekit` allows you to configure host window to some degree through `gamekit-system`
-properties:
+`trivial-gamekit` allows you to configure host window to some degree through `defgame`
+options:
 
 ```common_lisp
 (defvar *canvas-width* 800)
 (defvar *canvas-height* 600)
 
-(defclass hello-gamekit (gamekit:gamekit-system) ()
-  (:default-initargs
-   :viewport-width *canvas-width*     ; window's width
-   :viewport-height *canvas-height*   ; window's height
-   :viewport-title "Hello Gamekit!")) ; window's title
+(gamekit:defgame hello-gamekit () ()
+  (:viewport-width *canvas-width*)     ; window's width
+  (:viewport-height *canvas-height*)   ; window's height
+  (:viewport-title "Hello Gamekit!"))  ; window's title
 ```
 
 Alrighty, let's bring a window back to continue our endeavor:
@@ -83,13 +82,13 @@ just need to override `gamekit:draw` generic function:
 ```
 
 We can do a couple of observations from this example. First, unlike many other 2D drawing APIs,
-`trivial-gamekit` (and `cl-bodge` ultimately) uses bottom-left corner as an origin and y-axis
-pointing upwards for its 2D coordinate system. Second, colors are represented by 4-element
-vectors made with `#'gamekit:vec4` with values for each element ranging from 0.0 to 1.0
-(red/green/blue/alpha) and 2D coordinates are passed around using 2-element vectors.
+`trivial-gamekit` uses bottom-left corner as an origin and y-axis pointing upwards for its 2D
+coordinate system. Second, colors are represented by 4-element vectors made with
+`#'gamekit:vec4` with values for each element ranging from 0.0 to 1.0 (red/green/blue/alpha) and
+2D coordinates are passed around using 2-element vectors.
 
 While we are at it, it's worth mentioning that 2D canvas has exactly the size we supplied to the
-`'hello-gamekit` as `:viewport-width` and `:viewport-height` initargs. So for this case,
+`'hello-gamekit` as `:viewport-width` and `:viewport-height` options. So for this case,
 bottom-left corner of our canvas is (0, 0) and top-right corner is (799, 599).
 
 Static black box is anything but exciting. Let's introduce some motion!
@@ -152,7 +151,7 @@ confuse it for bezier curve with animated control points!
 
 ```common_lisp
 (defmethod gamekit:draw ((app hello-gamekit))
-  (gamekit:print-text "A snake that is!" 300 400)
+  (gamekit:draw-text "A snake that is!" (gamekit:vec2 300 400))
   (update-position (aref *curve* 1) (real-time-seconds))
   (update-position (aref *curve* 2) (+ 0.3 (real-time-seconds)))
   (gamekit:draw-curve (aref *curve* 0)
@@ -163,9 +162,7 @@ confuse it for bezier curve with animated control points!
                       :thickness 5.0))
 ```
 
-`#'gamekit:print-text` allows us to print a text onto the screen. Gamekit is able to ouput only
-a limited set of glyphs, unfortunately. Only latin, cyrillic and some special glyphs are
-supported at this moment.
+`#'gamekit:draw-text` allows us to put a text onto the screen.
 
 Anyway, quite a cringy snake, but it moves! We couldn't ask for more.
 
@@ -193,8 +190,10 @@ button is clicked.
                                (gamekit:y head-position) (gamekit:y *cursor-position*)))))
 ```
 
-Now, for enhanced interactivity, let's move snake's head while left button is pressed - dragging
-it along the way!
+Just click around in the window to see how that turned out.
+
+Now, for enhanced interactivity, let's move snake's head while
+left button is pressed - dragging it along the way!
 
 ```common_lisp
 (defvar *head-grabbed-p* nil)
@@ -238,14 +237,8 @@ public/snake-grab.ogg %}) sound file[^2] to `/tmp/hello-gamekit-assets/`. Now le
 where to find those with `:resource-path` property of `gamekit-system`.
 
 ```common_lisp
-(defclass hello-gamekit (gamekit:gamekit-system) ()
-  (:default-initargs
-   :resource-path "/tmp/hello-gamekit-assets/"
-   :viewport-width *canvas-width*
-   :viewport-height *canvas-height*
-   :viewport-title "Hello Gamekit!"))
+(gamekit:register-resource-package :keyword "/tmp/hello-gamekit-assets/")
 ```
-
 
 ### Images
 One can make quite a complex scene with just primitives like rectangles, ellipses, lines,
@@ -253,24 +246,19 @@ curves, etc. But for very intricate objects it is still much easier to just disp
 image. `trivial-gamekit` ready to help you with this too!
 
 
-First, we need to tell gamekit where it can find our image. We would use `#'import-image` for that:
+First, we need to tell gamekit where it can find our image. We would use `define-image` for that:
 ```common_lisp
-(defmethod gamekit:initialize-resources ((app hello-gamekit))
-  (gamekit:import-image :snake-head "snake-head.png"))
+(gamekit:define-image :snake-head "snake-head.png")
 ```
 
-Upon initialization, gamekit will load this image using base path you provided in
-`:resource-path` of your main class (`hello-gamekit` in this case) merging it with a relative
-path specified in a second argument of `#'import-image`. If you provide an absolute path, then
-base path would be ignored. First argument of that function is used to reference this image in
-other places later. `#'import-image` supports only .png images yet.
+By default, upon initialization or when evaluating at runtime (in REPL), gamekit will load this
+image using base path you provided with `#'register-resource-package` of your main class
+(`hello-gamekit` in this case) merging it with a relative path specified in a second argument of
+`define-image`. If you provide an absolute path, then base path would be ignored. First
+argument of that function is used to reference this image in other places
+later. `define-image` supports only .png images yet.
 
-Now we need to restart gamekit for it to grab our image.
-
-```common_lisp
-(gamekit:stop)
-(gamekit:start 'hello-gamekit)
-```
+No need to tell gamekit anything else - your image should have been already loaded!
 
 To put an image onto the screen you can use `#'gamekit:draw-image`. It has two arguments. First
 is the coords where image origin (its bottom-left corner) will be put. And the second one tells
@@ -297,21 +285,12 @@ A face appears!
 
 ### Sounds
 
-`trivial-gamekit` can help you with tricking not only eyes, but ears too! First, let's inform
-the gamekit where it can locate a sound with `#'import-audio` function. At this moment it
-supports files in `.ogg` format only.
+`trivial-gamekit` can help you with tricking not only player eyes, but ears too! First, let's
+inform the gamekit where it can locate a sound with `define-audio` macro. It supports a
+couple audio formats including `.ogg` (Ogg/Vorbis), `.flac` and `.wav`.
 
 ```common_lisp
-(defmethod gamekit:initialize-resources ((app hello-gamekit))
-  (gamekit:import-image :snake-head "snake-head.png")
-  (gamekit:import-sound :snake-grab "snake-grab.ogg"))
-```
-
-For gamekit to prepare all those resources for us we need to restart it again:
-
-```common_lisp
-(gamekit:stop)
-(gamekit:start 'hello-gamekit)
+(gamekit:define-sound :snake-grab "snake-grab.ogg")
 ```
 
 For playing a sound `#'gamekit:play` function is used. Let's play this sound when we grabbing
@@ -324,7 +303,7 @@ snake's head!
                        (setf *head-grabbed-p* t)))
 ```
 
-Try to grab a snake's head now. Amazing sound!
+Try to grab a snake's head now. Amazing!
 
 
 ## Result

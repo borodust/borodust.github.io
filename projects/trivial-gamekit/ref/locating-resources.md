@@ -78,11 +78,10 @@ Example:
 ```
 </div>
 
-*function* ***`prepare-resources`*** `(game &rest resource-names)`
+*function* ***`prepare-resources`*** `(&rest resource-names)`
 {: #gamekit-prepare-resources}
 <div class="bodge-docstring" markdown="block">
-Loads and prepares resources for later usage asynchronously. First argument is an instance of
-a game that can be obtained with [`#'gamekit`](#gamekit-gamekit). `resource-names` should be
+Loads and prepares resources for later usage asynchronously. `resource-names` should be
 symbols used previously registered with `define-*` macros.
 
 This function returns immediately. When resources are ready for use
@@ -97,8 +96,7 @@ resource autoloading.
 
 Example:
 ```common_lisp
-(gamekit:prepare-resources (gamekit:gamekit)
-                           'example-package::noto-sans
+(gamekit:prepare-resources 'example-package::noto-sans
                            'example-package::blop
                            'example-package::logo)
 ```

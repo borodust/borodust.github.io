@@ -26,13 +26,6 @@ soon as possible without much configuration hassle.
 * x86_64 SBCL or CCL
 
 
-## Documentation
-
-* [Getting Started]({% link projects/trivial-gamekit/getting-started.md %})
-* [User Manual]({% link projects/trivial-gamekit/manual.md %})
-* [Advanced Features]({% link projects/trivial-gamekit/advanced.md %})
-
-
 ## Installation and loading
 
 ```common_lisp
@@ -42,6 +35,12 @@ soon as possible without much configuration hassle.
 
 (ql:quickload :trivial-gamekit)
 ```
+
+## Documentation
+
+* [Getting Started]({% link projects/trivial-gamekit/getting-started.md %})
+* [User Manual]({% link projects/trivial-gamekit/manual.md %})
+* [Advanced Features]({% link projects/trivial-gamekit/advanced.md %})
 
 
 ## Example
@@ -54,6 +53,12 @@ soon as possible without much configuration hassle.
 
 (gamekit:start 'example)
 ```
+
+## Projects
+
+[NOTALONE](https://github.com/borodust/notalone)
+: 2D shooter game written during [Lisp Game Jam 2017 (Hard
+  Mode)](https://itch.io/jam/lisp-game-jam-2017-hard-mode/rate/186345)
 
 
 ## Help
