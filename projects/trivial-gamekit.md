@@ -57,8 +57,12 @@ soon as possible without much configuration hassle.
 ## Projects
 
 [NOTALONE](https://github.com/borodust/notalone)
-: 2D shooter game written during [Lisp Game Jam 2017 (Hard
+: 2D shooter game written for [Lisp Game Jam 2017 (Hard
   Mode)](https://itch.io/jam/lisp-game-jam-2017-hard-mode/rate/186345)
+
+[hello-gamekit](https://github.com/borodust/hello-gamekit)
+: `trivial-gamekit` example code from [Getting Started]({% link
+  projects/trivial-gamekit/getting-started.md %}) guide
 
 
 ## Help
