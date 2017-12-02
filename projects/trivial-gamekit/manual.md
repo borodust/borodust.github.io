@@ -45,7 +45,7 @@ contains all the state `gamekit` needs to run your game. It is instantiated by
 [`#'start`](#gamekit-start) which also bootstraps the whole application and opens a window, runs
 your game logic, rendering, etc. Only single game object can be run at a time, so subsequently
 calling [`#'start`](#gamekit-start) for the same or different game objects is disallowed - you
-need to stop game execution. To stop a running game you would need to call
+need to stop game execution first. To stop a running game you would need to call
 [`#'stop`](#gamekit-stop).
 
 [`#'start`](#gamekit-start) also invokes a default game loop. To hook into it you can use
@@ -77,20 +77,20 @@ First of all, we need to tell `gamekit` where to find resources. `gamekit` resou
 associated with Common Lisp packages. Any package can have associated filesystem directory to
 find resources in. Call [`#'register-resource-package`](#gamekit-register-resource-package) as a
 toplevel form to bind a directory to a package. Absolute paths required here. Below I'll try to
-explain why we need this resource-directory association.
+explain why we need this package-directory association.
 
 Before diving deeper, lets see how resources are defined. You tell `gamekit` what resources to
 load and use via [`#'define-image`](#gamekit-define-image),
 [`#'define-sound`](#gamekit-define-sound) or [`#'define-font`](#gamekit-define-font) macros.
-First argument is a symbol that would become an identificator for the resource and the second
-argument is a relative path to the resource.
+First argument to them is a symbol that would become an identificator for the resource and the
+second argument is a relative path to the resource.
 
 Now, when `gamekit` knows absolute path to root and relative paths to resouces, it can locate
-and prepare them to use in a game. To find absolute path to a resource `gamekit` looks into its
-id and extracts the package (resource identificators must be symbols), then searches for
-registered package-directory association and extracts absolute path for the package from there
-and finally `gamekit` combines absolute path of a package with resource relative path and can
-totally locate it.
+and prepare them to use in a game. To find absolute path to a certain resource `gamekit` looks
+into its id and extracts the package (resource identificators must be symbols), then searches
+for registered package-directory association and extracts absolute path for the package from
+there and finally `gamekit` combines absolute path of a package with resource's relative path
+and can locate it exactly.
 
 This seemingly confusing mechanism was implemented for several games to coexist in one lisp
 image. Unless you use keywords or common packages like `:cl-user`, resources are going to be
@@ -122,11 +122,11 @@ Canvas transformation operations are supported too. You can scale, translate, ro
 with [`#'scale-canvas`](#gamekit-scale-canvas),
 [`#'translate-canvas`](#gamekit-translate-canvas) and
 [`#'rotate-canvas`](#gamekit-rotate-canvas) accordingly. If you need to keep canvas state for
-nested drawing operations you will appreciate presence of
+nested drawing operations you will appreciate existence of
 [`#'with-pushed-canvas`](#gamekit-with-pushed-canvas) macro, that keeps canvas state to the
 dynamic extent of its body. This means that upon returning from the macro canvas transformation
 state will be returned to its original state before the macro and all transformation operations
-inside its body were canceled out.
+inside its body would be canceled out.
 
 **All** drawing operations should be performed inside [`#'draw`](#gamekit-draw).
 
@@ -140,7 +140,7 @@ range.
 
 ## Playing an audio
 
-Audio can substantially boost game atmosphere, and `gamekit` is ready to serve you well in this
+Audio can substantially boost game's atmosphere, and `gamekit` is ready to serve you well in this
 regard too. [`#'play-sound`](#gamekit-play-sound) will help with getting sounds to reach your
 users ears. On the other hand, [`#'stop-sound`](#gamekit-stop-sound) can be used to stop this
 process.
@@ -153,15 +153,15 @@ keyboard and mouse input to listen for player actions. You can pass a callback t
 keyboard/mouse buttons. Callback passed to [`#'bind-cursor`](#gamekit-bind-cursor) is going to
 be invoked when user moves a mouse. Callbacks provided are not stacked together, meaning if you
 try to bind multiple callbacks to the same button only last callback is actually going to be
-used. Same goes for cursor input.
+invoked. Same goes for cursor input.
 
 ## Building a distributable
 
-Sharing a Common Lisp game in a binary form amongst users was always a bit of pain. But fear no
-more! `gamekit` includes a mechanism for delivering your game packaged using only a single
-function - [`#'deliver`](#gamekit-deliver). It will build an executable, pack all used
-resources, copy required foreign libraries used by `trivial-gamekit` and compress all that into
-a shippable archive.
+Sharing a Common Lisp game in a binary form amongst users was always a bit of a pain. But fear
+no more! `gamekit` includes a mechanism for delivering your game packaged using only a single
+function - [`#'deliver`](#gamekit-deliver). It will build an executable, pack all required
+resources, copy needed foreign libraries used by `trivial-gamekit` and compress all that into a
+shippable archive.
 
 For building these packages for `Windows`, `GNU/Linux` and `macOS` with just a single push to a
 `github` or `gitlab` respository check out [Advanced Features]({% link
