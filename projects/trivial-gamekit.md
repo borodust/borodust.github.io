@@ -8,8 +8,11 @@ parent: projects
 
 ## Purpose
 
-This library is intended for users who wish to start with game development in Common Lisp as
+This framework is intended for users who wish to start with game development in Common Lisp as
 soon as possible without much configuration hassle.
+
+With `trivial-gamekit` you would be able to make simple 2D games: draw basic geometric forms,
+images and text, play sounds and listen to mouse and keyboard input.
 
 
 ## Source code
