@@ -48,6 +48,12 @@ calling [`#'start`](#gamekit-start) for the same or different game objects is di
 need to stop game execution first. To stop a running game you would need to call
 [`#'stop`](#gamekit-stop).
 
+You can put game initialization code into
+[`#'post-initialize`](#gamekit-post-initialize). Specifically, it is probably a best place to
+bind input via [`#'bind-cursor`](#gamekit-bind-cursor) or
+[`#'bind-button`](#gamekit-bind-button) as described below, but you are free to do any other
+preparations that require fully initialized game instance.
+
 [`#'start`](#gamekit-start) also invokes a default game loop. To hook into it you can use
 [`#'act`](#gamekit-act) and [`#'draw`](#gamekit-draw) methods. [`#'act`](#gamekit-act) is used
 for any activity you need to do per frame except drawing where [`#'draw`](#gamekit-draw) should
