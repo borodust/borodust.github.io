@@ -119,6 +119,11 @@ third or forth element out of a vector accordingly. Feel free to tinker with `#'
 changing how the position of the box is calculated. Just paste an updated function back into the
 REPL and you will see changes instantly! How awesome is that?
 
+Quite cool, unlike this state-chaning code in our `#'draw` method. `gamekit` has a special
+function to separate game-related logic that needs to be done per-frame from the drawing
+routine - `#'act`. It is, just like `#'draw`, called each frame, but in a bit different
+environment. All non-rendering per-frame tasks should go there.
+
 Gamekit exports several `draw-*` functions that could be useful for 2D drawing. Let's turn our
 moving box into a sinus snake!
 
@@ -135,9 +140,13 @@ moving box into a sinus snake!
     (setf (gamekit:y position) (+ 300 (* 100 (sin angle))))))
 
 
-(defmethod gamekit:draw ((app hello-gamekit))
+(defmethod gamekit:act ((app hello-gamekit))
   (update-position (aref *curve* 1) (real-time-seconds))
-  (update-position (aref *curve* 2) (+ 0.3 (real-time-seconds)))
+  (update-position (aref *curve* 2) (+ 0.3 (real-time-seconds))))
+```
+
+```common_lisp
+(defmethod gamekit:draw ((app hello-gamekit))
   (gamekit:draw-curve (aref *curve* 0)
                       (aref *curve* 3)
                       (aref *curve* 1)
@@ -152,8 +161,6 @@ confuse it for bezier curve with animated control points!
 ```common_lisp
 (defmethod gamekit:draw ((app hello-gamekit))
   (gamekit:draw-text "A snake that is!" (gamekit:vec2 300 400))
-  (update-position (aref *curve* 1) (real-time-seconds))
-  (update-position (aref *curve* 2) (+ 0.3 (real-time-seconds)))
   (gamekit:draw-curve (aref *curve* 0)
                       (aref *curve* 3)
                       (aref *curve* 1)
@@ -165,7 +172,6 @@ confuse it for bezier curve with animated control points!
 `#'gamekit:draw-text` allows us to put a text onto the screen.
 
 Anyway, quite a cringy snake, but it moves! We couldn't ask for more.
-
 
 ## Input
 
@@ -267,8 +273,6 @@ which image gamekit should use.  Let's improve our `#'draw` method with it!
 ```common_lisp
 (defmethod gamekit:draw ((app hello-gamekit))
   (gamekit:print-text "A snake that is!" 300 400)
-  (update-position (aref *curve* 1) (real-time-seconds))
-  (update-position (aref *curve* 2) (+ 0.1 (real-time-seconds)))
   (gamekit:draw-curve (aref *curve* 0)
                       (aref *curve* 3)
                       (aref *curve* 1)
