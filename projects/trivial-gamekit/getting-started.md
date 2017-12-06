@@ -232,7 +232,7 @@ arguments which will be called when specified key or button reaches supplied sta
 
 To grab cursor movement one can use `#'bind-cursor` function. Its only argument represents a
 function of two arguments - x and y of mouse cursor position. The latter is called every time
-mouse cursor changes it's location.
+mouse cursor changes its location.
 
 
 ## Assets
@@ -240,7 +240,7 @@ mouse cursor changes it's location.
 We need a couple of resources prepared to continue with this guide. Download [this]({% link
 public/snake-head.png %}) (right click on the link -> save as) image[^1] and [this]({% link
 public/snake-grab.ogg %}) sound file[^2] to `/tmp/hello-gamekit-assets/`. Now let's tell gamekit
-where to find those with `:resource-path` property of `gamekit-system`.
+where to find those with `#'register-resource-package` function.
 
 ```common_lisp
 (gamekit:register-resource-package :keyword "/tmp/hello-gamekit-assets/")
