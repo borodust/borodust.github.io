@@ -84,6 +84,20 @@ Example:
 ```
 </div>
 
+*generic* ***`pre-destroy`*** `(system)`
+{: #gamekit-pre-destroy}
+<div class="bodge-docstring" markdown="block">
+This function is called just before shutting down a game instance for you to
+free all acquired resources and do any other clean up procedures.
+
+Example:
+```common_lisp
+(defmethod gamekit:pre-destroy ((this example))
+  (release-foreign-memory)
+  (stop-threads))
+```
+</div>
+
 *generic* ***`act`*** `(system)`
 {: #gamekit-act}
 <div class="bodge-docstring" markdown="block">

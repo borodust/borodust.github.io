@@ -52,7 +52,10 @@ You can put game initialization code into
 [`#'post-initialize`](#gamekit-post-initialize). Specifically, it is probably a best place to
 bind input via [`#'bind-cursor`](#gamekit-bind-cursor) or
 [`#'bind-button`](#gamekit-bind-button) as described below, but you are free to do any other
-preparations that require fully initialized game instance.
+preparations that require fully initialized game instance. If you need to release any unmanaged
+resources (e.g. foreign memory you allocated during a game or in
+[`#'post-initialize`](#gamekit-post-initialize)) to avoid leaks you can override
+[`#'pre-destroy`](#gamekit-pre-destroy) function which is called after last game loop iteration.
 
 [`#'start`](#gamekit-start) also invokes a default game loop. To hook into it you can use
 [`#'act`](#gamekit-act) and [`#'draw`](#gamekit-draw) methods. [`#'act`](#gamekit-act) is used

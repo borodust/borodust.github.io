@@ -3,6 +3,7 @@
 * [stop](#gamekit-stop)
 * [gamekit](#gamekit-gamekit)
 * [post-initialize](#gamekit-post-initialize)
+* [pre-destroy](#gamekit-pre-destroy)
 * [act](#gamekit-act)
 * [draw](#gamekit-draw)
 * [vec2](#gamekit-vec2)
