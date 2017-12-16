@@ -45,12 +45,10 @@ env:
   - GAMEKIT_SYSTEM_NAME: example
   - GAMEKIT_APPLICATION_PACKAGE: example-package
   - GAMEKIT_APPLICATION_MAIN_CLASS: example
-  - PATH=~/.roswell/bin:$PATH
-  - ROSWELL_INSTALL_DIR=$HOME/.roswell
-  - GAMEKIT_TARGET_PACKAGE=$GAMEKIT_SYSTEM_NAME-x86-64-$TRAVIS_OS_NAME-$TRAVIS_BRANCH.zip
+  - PATH: ~/bin/:$PATH
+  - GAMEKIT_TARGET_PACKAGE: $GAMEKIT_SYSTEM_NAME-x86-64-$TRAVIS_OS_NAME-$TRAVIS_BRANCH.zip
+  - GAMEKIT_BUILD_DIR: /tmp/$(GAMEKIT_SYSTEM_NAME)
   - secure: "your+encrypted+data+containing+GITHUB_TOKEN=githubaccesstoken"
-  matrix:
-  - LISP=sbcl-bin
 
 branches:
   only:
@@ -61,22 +59,23 @@ os:
   - osx
 
 install:
-  - curl -L https://raw.githubusercontent.com/roswell/roswell/release/scripts/install-for-ci.sh | sh
-  - ros run -e '(ql-dist:install-dist "http://bodge.borodust.org/dist/org.borodust.bodge.txt" :prompt nil :replace t)' -q
-  - ros install trivial-gamekit/distribution
+  - curl -L http://bodge.borodust.org/files/install.sh | sh
 
 cache:
   directories:
-  - "$HOME/.roswell"
-  - "$HOME/.config/common-lisp"
-
-before_script: ln -fs $TRAVIS_BUILD_DIR ~/.roswell/local-projects/
+  - "$HOME/quicklisp/"
+  - "$HOME/opt/sbcl/"
+  - "$HOME/.config/common-lisp/"
 
 script:
-  - ros -L sbcl-bin run -s trivial-gamekit/distribution -s $GAMEKIT_SYSTEM_NAME -e "(gamekit.distribution:deliver :$GAMEKIT_SYSTEM_NAME '$GAMEKIT_APPLICATION_PACKAGE::$GAMEKIT_APPLICATION_MAIN_CLASS)" -q
+  - >
+    sbcl --script $HOME/bodge/scripts/build-gamekit-system.lisp
+    $GAMEKIT_SYSTEM_NAME $GAMEKIT_APPLICATION_PACKAGE $GAMEKIT_APPLICATION_MAIN_CLASS
+    $TRAVIS_BUILD_DIR
+    $GAMEKIT_BUILD_DIR
 
 before_deploy:
-  - mv "$TRAVIS_BUILD_DIR/build/$GAMEKIT_SYSTEM_NAME.zip" $GAMEKIT_TARGET_PACKAGE
+  - mv "$GAMEKIT_BUILD_DIR/$GAMEKIT_SYSTEM_NAME.zip" $GAMEKIT_TARGET_PACKAGE
 
 deploy:
   provider: releases
@@ -144,6 +143,7 @@ environment:
     GAMEKIT_APPLICATION_PACKAGE: example-package
     GAMEKIT_APPLICATION_MAIN_CLASS: example
     GAMEKIT_ARTIFACT: $(GAMEKIT_SYSTEM_NAME)-x86-64-windows-$(APPVEYOR_REPO_TAG_NAME).zip
+    GAMEKIT_BUILD_DIR: $(TMP)\$(GAMEKIT_SYSTEM_NAME)
 
 skip_non_tags: true
 
@@ -153,22 +153,20 @@ branches:
     - "/^v\\d+(\\.\\d+)+$/"
 
 install:
-  - set PATH=C:\msys64\usr\bin;%HOMEPATH%\roswell\;%PATH%
-  - pacman --noconfirm -S zip unzip
-  - curl -O bodge.borodust.org/files/roswell-x86_64.zip
-  - unzip roswell-x86_64.zip -d %HOMEPATH%
-  - ros run -e "(ql-dist:install-dist \"http://bodge.borodust.org/dist/org.borodust.bodge.txt\" :prompt nil :replace t)" -q
-  - ros install trivial-gamekit/distribution
-  - mkdir %HOMEPATH%\.roswell\local-projects
-  - mklink /D %HOMEPATH%\.roswell\local-projects\%GAMEKIT_SYSTEM_NAME% %APPVEYOR_BUILD_FOLDER%
+  - set PATH=C:\msys64\usr\bin\;%PATH%
+  - pacman --noconfirm -S zip
+  - sh -c "curl -L http://bodge.borodust.org/files/install.sh | sh"
 
 build_script:
-  - set PATH=C:\msys64\usr\bin;%HOMEPATH%\roswell\;%PATH%
-  - ros -L sbcl-bin run -s trivial-gamekit/distribution -s %GAMEKIT_SYSTEM_NAME% -e "(gamekit.distribution:deliver :%GAMEKIT_SYSTEM_NAME% '%GAMEKIT_APPLICATION_PACKAGE%::%GAMEKIT_APPLICATION_MAIN_CLASS%)" -q
-  - mv %APPVEYOR_BUILD_FOLDER%/build/%GAMEKIT_SYSTEM_NAME%.zip %APPVEYOR_BUILD_FOLDER%/build/%GAMEKIT_ARTIFACT%
+  - >
+    sh -c "$HOME/bin/sbcl --script $HOME/bodge/scripts/build-gamekit-system.lisp
+    %GAMEKIT_SYSTEM_NAME% %GAMEKIT_APPLICATION_PACKAGE% %GAMEKIT_APPLICATION_MAIN_CLASS%
+    $(cygpath -u '%APPVEYOR_BUILD_FOLDER%')
+    $(cygpath -u '%GAMEKIT_BUILD_DIR%')"
+  - mv %GAMEKIT_BUILD_DIR%\%GAMEKIT_SYSTEM_NAME%.zip %GAMEKIT_ARTIFACT%
 
 artifacts:
-  - path: build/%GAMEKIT_ARTIFACT%
+  - path: "%GAMEKIT_ARTIFACT%"
     name: release_archive
 
 deploy:
@@ -177,7 +175,7 @@ deploy:
   tag: $(APPVEYOR_REPO_TAG_NAME)
   description: $(APPVEYOR_REPO_COMMIT_MESSAGE)
   auth_token:
-    secure: yourencryptedgithubkey
+    secure: "yourencryptedgithubkey"
   artifact: release_archive
   force_update: true
   draft: false
