@@ -187,7 +187,10 @@ with `>>` and so on. We can rewrite one of our examples as such:
 ## Invariants
 As already mentioned, they exist to guard atomic blocks from concurrent execution where needed.
 One can imagine flow block to be a critical section that is guarded by mutex/lock, only there's
-no blocking involved - flow execution is purely non-blocking.
+no blocking involved - flow execution is purely non-blocking. It's worth mentioning, invariant
+argument of atomic block is evaluated, meaning you can use any expression for it to return
+required invariant value.
+
 
 For the sake of experiment, let's define some long running non-thread-safe incrementing function
 and required state:
