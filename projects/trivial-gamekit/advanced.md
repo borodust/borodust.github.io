@@ -47,7 +47,7 @@ env:
   - GAMEKIT_APPLICATION_MAIN_CLASS: example
   - PATH: ~/bin/:$PATH
   - GAMEKIT_TARGET_PACKAGE: $GAMEKIT_SYSTEM_NAME-x86-64-$TRAVIS_OS_NAME-$TRAVIS_BRANCH.zip
-  - GAMEKIT_BUILD_DIR: /tmp/$(GAMEKIT_SYSTEM_NAME)
+  - GAMEKIT_BUILD_DIR: /tmp/$GAMEKIT_SYSTEM_NAME
   - secure: "your+encrypted+data+containing+GITHUB_TOKEN=githubaccesstoken"
 
 branches:
@@ -61,15 +61,9 @@ os:
 install:
   - curl -L http://bodge.borodust.org/files/install.sh | sh
 
-cache:
-  directories:
-  - "$HOME/quicklisp/"
-  - "$HOME/opt/sbcl/"
-  - "$HOME/.config/common-lisp/"
-
 script:
   - >
-    sbcl --script $HOME/bodge/scripts/build-gamekit-system.lisp
+    lisp $HOME/bodge/scripts/build-gamekit-system.lisp
     $GAMEKIT_SYSTEM_NAME $GAMEKIT_APPLICATION_PACKAGE $GAMEKIT_APPLICATION_MAIN_CLASS
     $TRAVIS_BUILD_DIR
     $GAMEKIT_BUILD_DIR
@@ -122,7 +116,7 @@ into GitHub releases of your project repository under `v1.0.0` tag.
 ### AppVeyor
 
 While `Travis CI` allows you to build `GNU/Linux` and `macOS` version of your software, it
-doesn't support windows yet. Hopefully, AppVeyor does!
+doesn't support `Windows` yet. Hopefully, AppVeyor does!
 
 Go to AppVeyor [website](https://travis-ci.org) and follow their registration process that is
 straightforward as Travis CI one. Setup AppVeyor to track your project's GitHub repository in
@@ -159,7 +153,7 @@ install:
 
 build_script:
   - >
-    sh -c "$HOME/bin/sbcl --script $HOME/bodge/scripts/build-gamekit-system.lisp
+    sh -c "$HOME/bin/lisp $HOME/bodge/scripts/build-gamekit-system.lisp
     %GAMEKIT_SYSTEM_NAME% %GAMEKIT_APPLICATION_PACKAGE% %GAMEKIT_APPLICATION_MAIN_CLASS%
     $(cygpath -u '%APPVEYOR_BUILD_FOLDER%')
     $(cygpath -u '%GAMEKIT_BUILD_DIR%')"
