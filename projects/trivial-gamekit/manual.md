@@ -172,6 +172,13 @@ function - [`#'deliver`](#gamekit-deliver). It will build an executable, pack al
 resources, copy needed foreign libraries used by `trivial-gamekit` and compress all that into a
 shippable archive.
 
+To gain access to this function you need additionally load `:trivial-gamekit/distribution`
+system, and then you would be able to find it in `gamekit.distribution` package.
+
+```common_lisp
+(ql:quickload :trivial-gamekit/distribution)
+```
+
 For building these packages for `Windows`, `GNU/Linux` and `macOS` with just a single push to a
 `github` or `gitlab` respository check out [Advanced Features]({% link
 projects/trivial-gamekit/advanced.md %}) section.

@@ -13,12 +13,14 @@ distributable package on various platforms. If those executables are not on your
 `PATH`, you would need to provide absolute paths to them via `:zip` and `:sbcl` key arguments
 accordingly.
 
+You can load this function into an image via `:trivial-gamekit/distribution` system.
+
 Example:
 ```common_lisp
+(ql:quickload :trivial-gamekit/distribution)
 (gamekit.distribution:deliver :example-asdf-system 'example-package::example
                               :build-directory "/tmp/example-game/"
                               :zip "/usr/bin/zip"
                               :sbcl "/usr/bin/sbcl")
 ```
 </div>
-
