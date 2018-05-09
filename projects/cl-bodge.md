@@ -17,13 +17,5 @@ GitHub repository: [cl-bodge]({{ site.borodust.github }}/cl-bodge)
 [trivial-gamekit]({{ site.borodust.github }}/trivial-gamekit)
 : Simplified interface to `cl-bodge`
 
-## Games
-[Mortar Combat]({% link projects/mortar-combat.md %})
-: Multiplayer 3D first-person shooter
-
-[Ball-Z]({{ site.borodust.github }}/ball-z)
-: Zuma-like 3D puzzle
-
-
 ----------
 [^1]: No, it obviously not, but I needed smth that fits bodge abbrevation

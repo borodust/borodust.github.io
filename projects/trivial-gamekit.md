@@ -59,13 +59,19 @@ images and text, play sounds and listen to mouse and keyboard input.
 
 ## Projects
 
+[hello-gamekit](https://github.com/borodust/hello-gamekit)
+: `trivial-gamekit` example code from [Getting Started]({% link
+  projects/trivial-gamekit/getting-started.md %}) guide
+
 [NOTALONE](https://github.com/borodust/notalone)
 : 2D shooter game written for [Lisp Game Jam 2017 (Hard
   Mode)](https://itch.io/jam/lisp-game-jam-2017-hard-mode/rate/186345)
 
-[hello-gamekit](https://github.com/borodust/hello-gamekit)
-: `trivial-gamekit` example code from [Getting Started]({% link
-  projects/trivial-gamekit/getting-started.md %}) guide
+[Ball Z: Second Dimension](https://github.com/borodust/ball-z-2d)
+: 2D physics-based puzzle developed for [Lisp Game Jam 2018](https://itch.io/jam/lisp-game-jam-2018/rate/252161)
+
+[Minimal Danmaku Simulator](https://github.com/RyanBurnside/mds) by Ryan ["Pixel_Outlaw"](https://github.com/RyanBurnside) Burnside
+: [Lisp Game Jam 2018](https://itch.io/jam/lisp-game-jam-2018/rate/251765) entry in Shoot'em Up genre
 
 
 ## Help
