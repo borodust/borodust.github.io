@@ -18,7 +18,7 @@ to `t`.
 
 Example:
 
-```common_lisp
+```common-lisp
 (gamekit:defgame example ()
   ;; some game related state
   ((world :initform (make-instance 'world))
@@ -41,7 +41,7 @@ called first before running `start` again.
 
 Example:
 
-```common_lisp
+```common-lisp
 (gamekit:start 'example)
 ```
 </div>
@@ -52,7 +52,7 @@ Example:
 Stops currently running game releasing acquired resources.
 
 Example:
-```common_lisp
+```qcommon-lisp
 (gamekit:stop)
 ```
 </div>
@@ -63,7 +63,7 @@ Example:
 Returns instance of a running game or `nil` if no game is started yet.
 
 Example:
-```common_lisp
+```common-lisp
 (gamekit:gamekit)
 ```
 </div>
@@ -77,7 +77,7 @@ method of this function. For example, it would be logical to bind input via
 [`#'bind-cursor`](#gamekit-bind-cursor) or [`#'bind-button`](#gamekit-bind-button) here.
 
 Example:
-```common_lisp
+```qcommon-lisp
 (defmethod gamekit:post-initialize ((this example))
   (init-game)
   (bind-input))
@@ -91,7 +91,7 @@ This function is called just before shutting down a game instance for you to
 free all acquired resources and do any other clean up procedures.
 
 Example:
-```common_lisp
+```common-lisp
 (defmethod gamekit:pre-destroy ((this example))
   (release-foreign-memory)
   (stop-threads))
@@ -106,7 +106,7 @@ any per-frame behavior to the game. NOTE: all drawing operations should
 be performed in [`#'draw`](#gamekit-draw) method.
 
 Example:
-```common_lisp
+```common-lisp
 (defmethod gamekit:act ((this example))
   (report-fps))
 ```
@@ -119,9 +119,8 @@ Called every game loop iteration for frame rendering.
 All drawing operations should be performed in this method.
 
 Example:
-```common_lisp
+```common-lisp
 (defmethod gamekit:draw ((this example))
   (gamekit:draw-text "Hello, Gamedev!" (gamekit:vec2 10 10)))
 ```
 </div>
-

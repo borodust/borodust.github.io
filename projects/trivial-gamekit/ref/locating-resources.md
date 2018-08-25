@@ -9,7 +9,7 @@ locate package via #'find-package. Second argument is a filesystem path to a dir
 resources can be found.
 
 Example:
-```common_lisp
+```common-lisp
 (gamekit:register-resource-package :example-package
                                    "/home/gamdev/example-game/assets/")
 ```
@@ -27,7 +27,7 @@ Name must be a symbol. Package of that symbol and its associated path (via
 resource, if relative path is given as an argument to this macro.
 
 Example:
-```common_lisp
+```common-lisp
 (gamekit:define-image 'example-package::logo "images/logo.png")
 ```
 </div>
@@ -44,7 +44,7 @@ Name must be a symbol. Package of that symbol and its associated path (via
 resource, if relative path is given as an argument to this macro.
 
 Example:
-```common_lisp
+```common-lisp
 (gamekit:define-sound 'example-package::blop "sounds/blop.ogg")
 ```
 </div>
@@ -60,7 +60,7 @@ Name must be a symbol. Package of that symbol and its associated path (via
 resource, if relative path is given as an argument to this macro.
 
 Example:
-```common_lisp
+```common-lisp
 (gamekit:define-font 'example-package::noto-sans "fonts/NotoSans-Regular.ttf")
 ```
 </div>
@@ -73,7 +73,7 @@ customize text looks. `font-id` must be a valid resource name previously registe
 [`define-font`](#gamekit-define-font). Second argument is a font size in pixels.
 
 Example:
-```common_lisp
+```common-lisp
 (gamekit:make-font 'example-package::noto-sans 32)
 ```
 </div>
@@ -95,7 +95,7 @@ to :prepare-resources option of a [`defgame`](#gamekit-defgame) macro which will
 resource autoloading.
 
 Example:
-```common_lisp
+```common-lisp
 (gamekit:prepare-resources 'example-package::noto-sans
                            'example-package::blop
                            'example-package::logo)
@@ -112,11 +112,10 @@ be used.
 Override this generic function to know when resources are ready.
 
 Example:
-```common_lisp
+```common-lisp
 (defmethod gamekit:notice-resources ((this example) &rest resource-names)
   (declare (ignore resource-names))
   (gamekit:play-sound 'example-package::blop)
   (show-start-screen))
 ```
 </div>
-

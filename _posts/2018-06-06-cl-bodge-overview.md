@@ -1,7 +1,7 @@
 ---
 layout: post
-title: cl-bodge documentation efforts have begun
-excerpt_separator: <!--excerpt-->
+title: cl-bodge documentation efforts has begun
+excerpt_separator: <!-- excerpt -->
 ---
 
 It started, at last!
@@ -17,5 +17,6 @@ most stable parts of it. Refreshed [introductory]({% link projects/cl-bodge.md %
 Hopefully, that wouldn't be the end of it - the immense effort generic programmers like myself
  very love to engage with.
 
+<!-- excerpt -->
 
 [^1]: literally, a couple of people asked - `cl-bodge` is famous now!

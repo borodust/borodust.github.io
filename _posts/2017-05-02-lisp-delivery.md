@@ -29,7 +29,7 @@ This problem is actually fairly easy to solve. Obviously, hardcoded absolute pat
 used, but we can find a path to a system using `asdf` facilities if target system's definition
 is already read, which is the case during system components loading:
 
-``` common_lisp
+``` common-lisp
 ;; if system's name is :awesome-game
 ;; and assets stored in the assets/ subdirectory of it
 ;; then we can find absolute path to the latter with
@@ -57,7 +57,7 @@ before wrappers will try to do the same. This way we can get libraries supplied 
 system opened instead of default ones if those are present in the operating system's default
 search directories.
 
-``` common_lisp
+``` common-lisp
 ;;; put dynamic libraries into lib/ subdirectory
 ;;; of your :awesome-game-libraries system
 
@@ -87,7 +87,7 @@ search directories.
 Now you can trick `cffi` into opening your dynamic libraries instead of default ones by loading
 `:awesome-game-libraries` first:
 
-``` common_lisp
+``` common-lisp
 ;; using asdf
 (asdf:load-systems :awesome-game-libraries :awesome-game)
 ;; or quicklisp
@@ -144,7 +144,7 @@ of our software, one can deploy custom Quicklisp distribution made with `quickdi
 onto public server somewhere. Users then will be able to load all libraries your game needs with
 just two commands:
 
-``` common_lisp
+``` common-lisp
 ;;; for cl-bodge distribution and :trivial-gamekit system
 
 ;; add cl-bodge distribution into quicklisp
@@ -179,7 +179,7 @@ Because an application should be able to run on different machines, you need to 
 any foreign libraries that are open during loading time before lisp image is dumped into
 executable:
 
-``` common_lisp
+``` common-lisp
 ;; close all loaded foreign libraries
 (loop for library in (cffi:list-foreign-libraries :loaded-only t)
    do (cffi:close-foreign-library library))
@@ -191,7 +191,7 @@ machine to machine.
 
 Do not forget to load them back during application initialization:
 
-``` common_lisp
+``` common-lisp
 ;; reload all foreign libraries
 (loop for library in (cffi:list-foreign-libraries)
    do (cffi:load-foreign-library library))
@@ -251,7 +251,7 @@ start /d "%WORK_DIR%" awesome-game.bin awesome-game.conf
 Then in a function supplied as `--entry` to `buildapp` tool, you will be able to extract all
 information you need:
 
-``` common_lisp
+``` common-lisp
 ;; if we supplied #'main function to --entry option of buildapp
 (defun main (args)
   ;; load and parse configuration we passed as an argument to the executable

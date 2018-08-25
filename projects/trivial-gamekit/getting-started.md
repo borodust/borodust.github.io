@@ -22,14 +22,14 @@ First we need to install `trivial-gamekit` system. This is quite easy to accompl
 Now, when the system is successfully loaded, let's define a main class that will manage our
 application:
 
-```common_lisp
+```common-lisp
 (gamekit:defgame hello-gamekit () ())
 ```
 
 Yes. That's it. You totally configured an application that will use OpenGL graphics, OpenAL
 audio and mouse/keyboard input of a host OS. Let's confirm it works!
 
-```common_lisp
+```common-lisp
 (gamekit:start 'hello-gamekit)
 ```
 
@@ -41,7 +41,7 @@ Here we go. Canvas for your imagination to go wild onto is now ready!
 You can close `trivial-gamekit`'s window and release acquired system resources by using your OS
 UI or with
 
-```common_lisp
+```common-lisp
 (gamekit:stop)
 ```
 
@@ -51,7 +51,7 @@ UI or with
 `trivial-gamekit` allows you to configure host window to some degree through `defgame`
 options:
 
-```common_lisp
+```common-lisp
 (defvar *canvas-width* 800)
 (defvar *canvas-height* 600)
 
@@ -63,7 +63,7 @@ options:
 
 Alrighty, let's bring a window back to continue our endeavor:
 
-```common_lisp
+```common-lisp
 (gamekit:start 'hello-gamekit)
 ```
 
@@ -72,7 +72,7 @@ Alrighty, let's bring a window back to continue our endeavor:
 Hopefully, `trivial-gamekit` manages rendering loop for you. To draw anything on the screen you
 just need to override `gamekit:draw` generic function:
 
-```common_lisp
+```common-lisp
 (defvar *black* (gamekit:vec4 0 0 0 1))
 (defvar *origin* (gamekit:vec2 0 0))
 
@@ -93,7 +93,7 @@ bottom-left corner of our canvas is (0, 0) and top-right corner is (799, 599).
 
 Static black box is anything but exciting. Let's introduce some motion!
 
-```common_lisp
+```common-lisp
 (defvar *current-box-position* (gamekit:vec2 0 0))
 
 (defun real-time-seconds ()
@@ -128,7 +128,7 @@ Gamekit exports several `draw-*` functions that could be useful for 2D drawing. 
 moving box into a sinus snake!
 
 
-```common_lisp
+```common-lisp
 (defvar *curve* (make-array 4 :initial-contents (list (gamekit:vec2 300 300)
                                                       (gamekit:vec2 375 300)
                                                       (gamekit:vec2 425 300)
@@ -145,7 +145,7 @@ moving box into a sinus snake!
   (update-position (aref *curve* 2) (+ 0.3 (real-time-seconds))))
 ```
 
-```common_lisp
+```common-lisp
 (defmethod gamekit:draw ((app hello-gamekit))
   (gamekit:draw-curve (aref *curve* 0)
                       (aref *curve* 3)
@@ -158,7 +158,7 @@ moving box into a sinus snake!
 Well, people won't beleive us it is a snake, so I guess we need to leave a note for them to not
 confuse it for bezier curve with animated control points!
 
-```common_lisp
+```common-lisp
 (defmethod gamekit:draw ((app hello-gamekit))
   (gamekit:draw-text "A snake that is!" (gamekit:vec2 300 400))
   (gamekit:draw-curve (aref *curve* 0)
@@ -180,7 +180,7 @@ of any kind? So let's put a head of our snake at a place under the cursor each t
 button is clicked.
 
 
-```common_lisp
+```common-lisp
 (defvar *cursor-position* (gamekit:vec2 0 0))
 
 (gamekit:bind-cursor (lambda (x y)
@@ -201,7 +201,7 @@ Just click around in the window to see how that turned out.
 Now, for enhanced interactivity, let's move snake's head while
 left button is pressed - dragging it along the way!
 
-```common_lisp
+```common-lisp
 (defvar *head-grabbed-p* nil)
 
 (gamekit:bind-cursor (lambda (x y)
@@ -242,7 +242,7 @@ public/snake-head.png %}) (right click on the link -> save as) image[^1] and [th
 public/snake-grab.ogg %}) sound file[^2] to `/tmp/hello-gamekit-assets/`. Now let's tell gamekit
 where to find those with `#'register-resource-package` function.
 
-```common_lisp
+```common-lisp
 (gamekit:register-resource-package :keyword "/tmp/hello-gamekit-assets/")
 ```
 
@@ -253,7 +253,7 @@ image. `trivial-gamekit` ready to help you with this too!
 
 
 First, we need to tell gamekit where it can find our image. We would use `define-image` for that:
-```common_lisp
+```common-lisp
 (gamekit:define-image :snake-head "snake-head.png")
 ```
 
@@ -270,7 +270,7 @@ To put an image onto the screen you can use `#'gamekit:draw-image`. It has two a
 is the coords where image origin (its bottom-left corner) will be put. And the second one tells
 which image gamekit should use.  Let's improve our `#'draw` method with it!
 
-```common_lisp
+```common-lisp
 (defmethod gamekit:draw ((app hello-gamekit))
   (gamekit:print-text "A snake that is!" 300 400)
   (gamekit:draw-curve (aref *curve* 0)
@@ -293,14 +293,14 @@ A face appears!
 inform the gamekit where it can locate a sound with `define-audio` macro. It supports a
 couple audio formats including `.ogg` (Ogg/Vorbis), `.flac` and `.wav`.
 
-```common_lisp
+```common-lisp
 (gamekit:define-sound :snake-grab "snake-grab.ogg")
 ```
 
 For playing a sound `#'gamekit:play` function is used. Let's play this sound when we grabbing
 snake's head!
 
-```common_lisp
+```common-lisp
 (gamekit:bind-button :mouse-left :pressed
                      (lambda ()
                        (gamekit:play :snake-grab)

@@ -1,5 +1,4 @@
-# Gems
-gems:
+plugins:
   - jekyll-paginate
 
 # Dependencies
@@ -12,7 +11,7 @@ permalink:        pretty
 # Setup
 title:            'Pavel Korolev'
 tagline:          'Borodust Webpage'
-description:      'Aware software developer'
+description:      'Aware software engineer'
 url:              https://borodust.org
 name:             Boroblog
 

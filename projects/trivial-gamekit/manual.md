@@ -175,7 +175,7 @@ shippable archive.
 To gain access to this function you need additionally load `:trivial-gamekit/distribution`
 system, and then you would be able to find it in `gamekit.distribution` package.
 
-```common_lisp
+```common-lisp
 (ql:quickload :trivial-gamekit/distribution)
 ```
 

@@ -16,7 +16,7 @@ key arguments accordingly.
 You can load this function into an image via `:trivial-gamekit/distribution` system.
 
 Example:
-```common_lisp
+```common-lisp
 (ql:quickload :trivial-gamekit/distribution)
 (gamekit.distribution:deliver :example-asdf-system 'example-package::example
                               :build-directory "/tmp/example-game/"
@@ -24,4 +24,3 @@ Example:
                               :lisp "/usr/bin/sbcl")
 ```
 </div>
-

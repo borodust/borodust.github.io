@@ -31,7 +31,7 @@ images and text, play sounds and listen to mouse and keyboard input.
 
 ## Installation and loading
 
-```common_lisp
+```common-lisp
 ;; add cl-bodge distribution into quicklisp
 ;; you need to do this only once per quicklisp installation
 (ql-dist:install-dist "http://bodge.borodust.org/dist/org.borodust.bodge.txt")
@@ -48,7 +48,7 @@ images and text, play sounds and listen to mouse and keyboard input.
 
 ## Example
 
-```common_lisp
+```common-lisp
 (gamekit:defgame example () ())
 
 (defmethod gamekit:draw ((this example))

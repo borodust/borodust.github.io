@@ -36,7 +36,7 @@ yourself!
 
 ### Via [Quicklisp](http://quicklisp.org)
 
-```common_lisp
+```common-lisp
 ;; add cl-bodge distribution into quicklisp
 (ql-dist:install-dist "http://bodge.borodust.org/dist/org.borodust.bodge.txt" :replace t :prompt nil)
 

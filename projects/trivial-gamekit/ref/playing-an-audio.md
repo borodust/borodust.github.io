@@ -5,7 +5,7 @@ Plays a sound defined earlier with [`define-sound`](#gamekit-define-sound). Pass
 `:looped-p` key to play sound in a loop.
 
 Example:
-```common_lisp
+```common-lisp
 (gamekit:play-sound 'example-package::blop
                     :looped-p t)
 ```
@@ -17,8 +17,7 @@ Example:
 Stops a playing sound by provided sound id.
 
 Example:
-```common_lisp
+```common-lisp
 (gamekit:stop-sound 'example-package::blop)
 ```
 </div>
-

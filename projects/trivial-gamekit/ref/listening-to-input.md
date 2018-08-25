@@ -9,7 +9,7 @@ there's active game exists started earlier with [`#'start`](#gamekit-start). `st
 Actions are not stacked together and would be overwritten for the same key and state.
 
 Supported keys:
-```common_lisp
+```common-lisp
   :space :apostrophe :comma :minus :period :slash
   :0 :1 :2 :3 :4 :5 :6 :7 :8 :9
   :semicolon :equal
@@ -35,7 +35,7 @@ Supported keys:
 ```
 
 Example
-```common_lisp
+```common-lisp
 (gamekit:bind-button :enter :pressed
                      (lambda ()
                        (start-game-for *player*)))
@@ -52,9 +52,8 @@ in: bottom left corner as (0,0) origin and y-axis pointing upwards.
 Actions doesn't stack together and would be overwritten each time `#'bind-cursor` is called.
 
 Example:
-```common_lisp
+```common-lisp
 (gamekit:bind-cursor (lambda (x y)
                        (shoot-to x y)))
 ```
 </div>
-

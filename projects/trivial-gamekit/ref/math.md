@@ -4,7 +4,7 @@
 Makes a two-dimensional vector.
 
 Example:
-```common_lisp
+```common-lisp
 (gamekit:vec2 0 0)
 ```
 </div>
@@ -15,7 +15,7 @@ Example:
 Makes a three-dimensional vector.
 
 Example:
-```common_lisp
+```common-lisp
 (gamekit:vec3 1 1 2)
 ```
 </div>
@@ -26,7 +26,7 @@ Example:
 Makes a four-dimensional vector.
 
 Example:
-```common_lisp
+```common-lisp
 (gamekit:vec4 1 1 2 3)
 ```
 </div>
@@ -37,7 +37,7 @@ Example:
 Element-wise multiplication. Accepts both vectors and scalars.
 
 Example:
-```common_lisp
+```common-lisp
 (gamekit:mult 2 (gamekit:vec2 1 1) 0.5)
 ```
 </div>
@@ -48,7 +48,7 @@ Example:
 Element-wise addition. Accepts both vectors and scalars.
 
 Example:
-```common_lisp
+```common-lisp
 (gamekit:add 1 (gamekit:vec2 1 1) -1)
 ```
 </div>
@@ -59,7 +59,7 @@ Example:
 Element-wise subtraction. Accepts both vectors and scalars.
 
 Example:
-```common_lisp
+```common-lisp
 (gamekit:subt 1 (gamekit:vec2 1 1) (gamekit:vec2 -1 -1))
 ```
 </div>
@@ -70,7 +70,7 @@ Example:
 Element-wise division. Accepts both vectors and scalars.
 
 Example:
-```common_lisp
+```common-lisp
 (gamekit:div (gamekit:vec2 1 1) 2 (gamekit:vec2 0.5 0.5))
 ```
 </div>
@@ -81,7 +81,7 @@ Example:
 Reads first element of a vector.
 
 Example:
-```common_lisp
+```common-lisp
 (gamekit:x (gamekit:vec2 1 1))
 ```
 </div>
@@ -92,7 +92,7 @@ Example:
 Stores first element of a vector.
 
 Example:
-```common_lisp
+```common-lisp
 (setf (gamekit:x (gamekit:vec2 1 1)) 0)
 ```
 </div>
@@ -103,7 +103,7 @@ Example:
 Reads second element of a vector.
 
 Example:
-```common_lisp
+```common-lisp
 (gamekit:y (gamekit:vec2 1 1))
 ```
 </div>
@@ -114,7 +114,7 @@ Example:
 Stores second element of a vector.
 
 Example:
-```common_lisp
+```common-lisp
 (setf (gamekit:y (gamekit:vec2 1 1)) 0)
 ```
 </div>
@@ -125,7 +125,7 @@ Example:
 Reads third element of a vector.
 
 Example:
-```common_lisp
+```common-lisp
 (gamekit:z (gamekit:vec4 1 1 2 3))
 ```
 </div>
@@ -136,7 +136,7 @@ Example:
 Stores third element of a vector.
 
 Example:
-```common_lisp
+```common-lisp
 (setf (gamekit:z (gamekit:vec4 1 1 2 3)) 0)
 ```
 </div>
@@ -147,7 +147,7 @@ Example:
 Reads fourth element of a vector.
 
 Example:
-```common_lisp
+```common-lisp
 (gamekit:w (gamekit:vec4 1 1 2 3))
 ```
 </div>
@@ -158,8 +158,7 @@ Example:
 Stores fourth element of a vector.
 
 Example:
-```common_lisp
+```common-lisp
 (setf (gamekit:w (gamekit:vec4 1 1 2 3)) 0)
 ```
 </div>
-

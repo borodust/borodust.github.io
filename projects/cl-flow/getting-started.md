@@ -22,14 +22,14 @@ to [find it and its dependencies](https://www.quicklisp.org/beta/faq.html#local-
 ([`cl-muth`](https://github.com/borodust/cl-muth)) in. Now, let's load this dispatcher and
 `cl-flow` itself.
 
-```common_lisp
+```common-lisp
 (ql:quickload '(:simple-flow-dispatcher :cl-flow))
 ```
 
 To assist with our journey, let's also import `cl-flow` symbols and define a utility method and
 variables to run our flow:
 
-```common_lisp
+```common-lisp
 (use-package :cl-flow)
 
 (defvar *output* *standard-output*)
@@ -47,7 +47,7 @@ variables to run our flow:
 
 ## First steps
 
-```common_lisp
+```common-lisp
 (run-flow (flow:atomically :default ()
             (print "Hello, flowing World!" *output*)))
 ```
@@ -56,7 +56,7 @@ Looks like a lot is happenning here and, guess what, it is indeed! We just print
 one of the four threads of the `*dispatcher*` asynchronously! To confirm, just add a `#'sleep` call
 and you will see that `#'run-flow` returns immediately and string is actually printed a bit later.
 
-```common_lisp
+```common-lisp
 (run-flow (flow:atomically :default ()
             (sleep 1)
             (print "Hello, flowing World!" *output*)))
@@ -66,7 +66,7 @@ Let's enhance this example with more feaures `cl-flow` provides for a quick over
 syntax.
 
 
-```common_lisp
+```common-lisp
 (run-flow (flow:serially
             (flow:atomically :default ()
               "Hello, flowing World!")
@@ -90,7 +90,7 @@ result of the first block into the second one and printing this result.
 But dispatching serially is no fun. We can do that w/o this crappy overloaded syntax. Let's do
 some multithreading!
 
-```common_lisp
+```common-lisp
 (run-flow (flow:serially
             (flow:concurrently
               (flow:atomically :p ()
@@ -115,7 +115,7 @@ after `flow:concurrently` one - see `result` argument.
 
 To make sure we indeed ran those blocks in parallel, let's change example a bit:
 
-```common_lisp
+```common-lisp
 (run-flow (flow:serially
             (flow:concurrently
               (flow:atomically :p ()
@@ -141,7 +141,7 @@ bit more maintainable.
 
 First, let's extract flows into a couple of functions:
 
-```common_lisp
+```common-lisp
 (defun string-constructing-flow ()
   (flow:concurrently
     (flow:atomically :p ()
@@ -158,7 +158,7 @@ First, let's extract flows into a couple of functions:
 
 And let's run those:
 
-```common_lisp
+```common-lisp
 (run-flow (flow:serially
             (string-constructing-flow)
             (printing-flow)))
@@ -176,7 +176,7 @@ For this special DSL for building computation trees I personally prefer shorthan
 available in `cl-flow`. `->` is a synonym for `flow:atomically`, `flow:serially` can be replaced
 with `>>` and so on. We can rewrite one of our examples as such:
 
-```common_lisp
+```common-lisp
 (run-flow (>> (~> (-> :p () "Hello")
                   (-> :q () "parallel")
                   (-> :s () "World!"))
@@ -195,7 +195,7 @@ required invariant value.
 For the sake of experiment, let's define some long running non-thread-safe incrementing function
 and required state:
 
-```common_lisp
+```common-lisp
 (defparameter *value* 0)
 
 (defun increment-global-variable ()
@@ -206,7 +206,7 @@ and required state:
 
 And a couple of flows that call this global-state-changing function:
 
-```common_lisp
+```common-lisp
 (defun fully-concurrent-flow ()
   (~> (-> :one ()
         (increment-global-variable))
@@ -230,7 +230,7 @@ three invariants used: `:one`, `:two` and `:three`, while `#'non-concurrent-flow
 `:one` only. Let's see what would happen when we run those!
 
 
-```common_lisp
+```common-lisp
 (setf *value* 0)
 (run-flow (fully-concurrent-flow))
 ```
@@ -245,7 +245,7 @@ and failed to communicate, incorrectly updating the state.
 
 What will happen with another flow we defined? Let's find out.
 
-```common_lisp
+```common-lisp
 (setf *value* 0)
 (run-flow (non-concurrent-flow))
 ```
