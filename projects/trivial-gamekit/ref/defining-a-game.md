@@ -77,7 +77,7 @@ method of this function. For example, it would be logical to bind input via
 [`#'bind-cursor`](#gamekit-bind-cursor) or [`#'bind-button`](#gamekit-bind-button) here.
 
 Example:
-```qcommon-lisp
+```common-lisp
 (defmethod gamekit:post-initialize ((this example))
   (init-game)
   (bind-input))
