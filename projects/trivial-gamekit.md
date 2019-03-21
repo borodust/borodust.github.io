@@ -73,6 +73,9 @@ images and text, play sounds and listen to mouse and keyboard input.
 [Minimal Danmaku Simulator](https://github.com/RyanBurnside/mds) by Ryan ["Pixel_Outlaw"](https://github.com/RyanBurnside) Burnside
 : [Lisp Game Jam 2018](https://itch.io/jam/lisp-game-jam-2018/rate/251765) entry in Shoot'em Up genre
 
+[Nature of Code in Common Lisp](https://github.com/mark-gerarts/nature-of-code) by Mark Gerarts
+: Exercises and examples from [Nature of Code](https://natureofcode.com/) book
+
 
 ## Help
 
