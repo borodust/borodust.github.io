@@ -14,6 +14,9 @@ root: true
 <http://www.gigamonkeys.com/book/>
 : Practical Common Lisp - awesome **free** online version of a book for learning Common Lisp
 
+[A Road to Common Lisp](http://stevelosh.com/blog/2018/08/a-road-to-common-lisp/)
+: Personal opinion on how to learn Common Lisp by Steve Losh
+
 <http://www.lispworks.com/documentation/HyperSpec/Front/index.htm>
 : Common Lisp HyperSpec - a language documentation
 
@@ -22,7 +25,6 @@ root: true
 
 [Delivering games written in Common Lisp]({{ site.baseurl }}{% post_url 2017-05-02-lisp-delivery %})
 : Guide to shipping Common Lisp applications while avoiding most annoying problems
-
 
 ## Math
 [A Beginners Guide to Dual-Quaternions](http://wscg.zcu.cz/wscg2012/short/A29-full.pdf)<sup>[copy]({% link public/shared/beginner_dual_quats.pdf %})</sup>
