@@ -41,10 +41,10 @@ yourself!
 (ql-dist:install-dist "http://bodge.borodust.org/dist/org.borodust.bodge.txt" :replace t :prompt nil)
 
 ;; load cl-bodge demo
-(ql:quickload :cl-bodge/demo)
+(ql:quickload :bodge-demo)
 
 ;; start the demo
-(cl-bodge.demo:run)
+(bodge-demo:run)
 ```
 
 ## Documentation
@@ -58,14 +58,6 @@ GitHub repository: [cl-bodge]({{ site.borodust.github }}/cl-bodge)
 [trivial-gamekit]({{ site.borodust.github }}/trivial-gamekit)
 : Substantially simplified interface to `cl-bodge` for quick introduction into gamedev with
   Common Lisp
-
-[bodge-appkit]({{ site.borodust.github }}/bodge-appkit)
-: System for quick `cl-bodge` application bootstrapping.
-
-
-[cludge]({{ site.borodust.github }}/cludge)
-: Visual editor for `cl-bodge`
-
 
 ## Support
 `cl-bodge` is an experimental one-man project so far - things could break. And if they do, feel
