@@ -64,9 +64,9 @@ you can use [`#'act`](#gamekit-act) and [`#'draw`](#gamekit-draw)
 methods. [`#'act`](#gamekit-act) is used for updaing your game state and
 [`#'draw`](#gamekit-draw) should be used exclusively for
 drawing/rendering. `:draw-rate` and `:act-rate` options of `defgame` can be used
-to specify rate `#'draw` and `#'act` in invocations per second separately,
-meaning if you set `:draw-rate` to 60 that would mean your framerate would be
-set to 60 frames per second.
+to specify rate for `#'draw` and `#'act` in invocations per second separately,
+meaning if you set `:draw-rate` to 60 your framerate would be set to 60 frames
+per second.
 
 ## Math
 
@@ -85,33 +85,39 @@ Element accessor methods for setting or getting values out of vectors are also e
 
 ## Locating resources
 
-Resources are very important for games. Textures, models, sounds, fonts, animations, tiles - you
-name it. `gamekit` has several routines prepared for you to ease the handling of those.
+Resources are very important for games. Textures, models, sounds, fonts,
+animations, tiles - you name it. `gamekit` has several routines prepared for you
+to ease the handling of those.
 
-First of all, we need to tell `gamekit` where to find resources. `gamekit` resources are
-associated with Common Lisp packages. Any package can have associated filesystem directory to
-find resources in. Call [`#'register-resource-package`](#gamekit-register-resource-package) as a
-toplevel form to bind a directory to a package. Absolute paths required here. Below I'll try to
-explain why we need this package-directory association.
+First of all, we need to tell `gamekit` where to find resources. `gamekit`
+resources are associated with Common Lisp packages. Any package can have
+associated filesystem directory to find resources in. Call
+[`#'register-resource-package`](#gamekit-register-resource-package) as a
+toplevel form to bind a directory to a package. Absolute paths required
+here. Below I'll try to explain why we need this package-directory association.
 
-Before diving deeper, lets see how resources are defined. You tell `gamekit` what resources to
-load and use via [`#'define-image`](#gamekit-define-image),
-[`#'define-sound`](#gamekit-define-sound) or [`#'define-font`](#gamekit-define-font) macros.
-First argument to them is a symbol that would become an identificator for the resource and the
-second argument is a relative path to the resource.
+Before diving deeper, lets see how resources are defined. You tell `gamekit`
+what resources to load and use via [`#'define-image`](#gamekit-define-image),
+[`#'define-sound`](#gamekit-define-sound) or
+[`#'define-font`](#gamekit-define-font) macros. First argument to them is a
+symbol that would become an identificator for the resource and the second
+argument is a relative path to the resource. Path can also be absolute, just be
+sure to use helper functions like `asdf:system-relative-pathname` to avoid
+hardcoding paths to your resources in the code.
 
-Now, when `gamekit` knows absolute path to root and relative paths to resouces, it can locate
-and prepare them to use in a game. To find absolute path to a certain resource `gamekit` looks
-into its id and extracts the package (resource identificators must be symbols), then searches
-for registered package-directory association and extracts absolute path for the package from
-there and finally `gamekit` combines absolute path of a package with resource's relative path
-and can locate it exactly.
+Now, when `gamekit` knows absolute path to root and relative paths to resouces,
+it can locate and prepare them to use in a game. To find absolute path to a
+certain resource `gamekit` looks into its id and extracts the package (resource
+identificators must be symbols), then searches for registered package-directory
+association and extracts absolute path for the package from there and finally
+`gamekit` combines absolute path of a package with resource's relative path and
+can locate it exactly.
 
-This seemingly confusing mechanism was implemented for several games to coexist in one lisp
-image. Unless you use keywords or common packages like `:cl-user`, resources are going to be
-uniquely identified and each game will load its own resources correctly. Another usage scenario is
-an `asdf` system with just a resources and their definitions for sharing between fellow game
-developers.
+This seemingly confusing mechanism was implemented for several games to coexist
+in one lisp image. Unless you use keywords or common packages like `:cl-user`,
+resources are going to be uniquely identified and each game will load its own
+resources correctly. Another usage scenario is an `asdf` system with just a
+resources and their definitions for sharing between fellow game developers.
 
 Resources are used by functions that requires them to operate, like
 [`#'draw-image`](#gamekit-draw-image), [`#'make-font`](#gamekit-make-font),
@@ -186,12 +192,12 @@ be invoked when user moves a mouse. Callbacks provided are not stacked together,
 try to bind multiple callbacks to the same button only last callback is actually going to be
 invoked. Same goes for cursor input.
 
-`gamekit` also support gamepads and exposing them as generic [xbox
-controllers](http://compat.cemu.info/w/images/2/2c/360_controller.svg). You can
-listen to gamepads being connected and disconnected with
+`gamekit` also support gamepads and exposing them as a [generic xbox
+controllers]({% link public/shared/360_controller.svg %}). You can listen to
+gamepads being connected and disconnected with
 [`#'bind-any-gamepad`](#gamekit-bind-any-gamepad). Unfortunately, `gamekit`
 doesn't have a reliable way to numerate gamepads, so gamepad-related functions
-operate on opaque gamepad references and you need manage player<->gamepad
+operate on opaque gamepad references and you need to manage player<->gamepad
 relationship yourself.
 
 For listening to gamepad buttons you can use
@@ -206,7 +212,7 @@ accordingly.
 Sometimes `gamekit` wouldn't be able to recognize your gamepad. In this case you
 need to specify path to custom controller mapping file in [SDL2
 format](https://github.com/gabomdq/SDL_GameControllerDB/blob/master/gamecontrollerdb.txt)
-in `BODGE_GAMECONTROLLERDB` environment variable.
+in `BODGE_GAMECONTROLLERDB` environment variable and restart the game.
 
 
 ## Building a distributable

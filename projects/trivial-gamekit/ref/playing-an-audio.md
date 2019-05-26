@@ -6,8 +6,8 @@ Plays a sound defined earlier with [`define-sound`](#gamekit-define-sound). Pass
 
 Example:
 ```common-lisp
-(gamekit:play-sound 'example-package::blop
-                    :looped-p t)
+ (gamekit:play-sound 'example-package::blop
+                     :looped-p t)
 ```
 </div>
 
@@ -18,6 +18,7 @@ Stops a playing sound by provided sound id.
 
 Example:
 ```common-lisp
-(gamekit:stop-sound 'example-package::blop)
+ (gamekit:stop-sound 'example-package::blop)
 ```
 </div>
+
