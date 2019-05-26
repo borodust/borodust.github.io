@@ -49,18 +49,24 @@ need to stop game execution first. To stop a running game you would need to call
 [`#'stop`](#gamekit-stop).
 
 You can put game initialization code into
-[`#'post-initialize`](#gamekit-post-initialize). Specifically, it is probably a best place to
-bind input via [`#'bind-cursor`](#gamekit-bind-cursor) or
-[`#'bind-button`](#gamekit-bind-button) as described below, but you are free to do any other
-preparations that require fully initialized game instance. If you need to release any unmanaged
-resources (e.g. foreign memory you allocated during a game or in
+[`#'post-initialize`](#gamekit-post-initialize). Specifically, it is probably a
+best place to bind input via [`#'bind-cursor`](#gamekit-bind-cursor) or
+[`#'bind-button`](#gamekit-bind-button) or any gamepad-related functions as
+described below, but you are free to do any other preparations that require
+fully initialized game instance. If you need to release any unmanaged resources
+(e.g. foreign memory you allocated during a game or in
 [`#'post-initialize`](#gamekit-post-initialize)) to avoid leaks you can override
-[`#'pre-destroy`](#gamekit-pre-destroy) function which is called after last game loop iteration.
+[`#'pre-destroy`](#gamekit-pre-destroy) function which is called after last game
+loop iteration.
 
-[`#'start`](#gamekit-start) also invokes a default game loop. To hook into it you can use
-[`#'act`](#gamekit-act) and [`#'draw`](#gamekit-draw) methods. [`#'act`](#gamekit-act) is used
-for any activity you need to do per frame except drawing where [`#'draw`](#gamekit-draw) should
-be used exclusively for drawing/rendering.
+[`#'start`](#gamekit-start) also invokes a default game loop. To hook into it
+you can use [`#'act`](#gamekit-act) and [`#'draw`](#gamekit-draw)
+methods. [`#'act`](#gamekit-act) is used for updaing your game state and
+[`#'draw`](#gamekit-draw) should be used exclusively for
+drawing/rendering. `:draw-rate` and `:act-rate` options of `defgame` can be used
+to specify rate `#'draw` and `#'act` in invocations per second separately,
+meaning if you set `:draw-rate` to 60 that would mean your framerate would be
+set to 60 frames per second.
 
 ## Math
 
@@ -119,13 +125,29 @@ immediately for you to be notified later with [`#'notice-resources`](#gamekit-no
 This is useful, when you don't want to wait until all assets are loaded and start rendering some
 loading or start screen right away and continue with game after all resources are ready.
 
+Sometimes you would want to ship a game with custom resources not supported by
+`gamekit` directly. To accomplish that, you can use
+[`define-text`](#gamekit-define-text) to include text files and
+[`define-binary`](#gamekit-define-binary) to include any file basically, which
+would be represented as a simple array of bytes. To access those resources you
+would need to use [`#'get-text`](#gamekit-get-text) and
+[`#'get-binary`](#gamekit-get-binary) correspondingly.
+
 ## Drawing
 
-`gamekit` provides simple to use but versatile drawing API. If you know how HTML5 canvas API is
-organized you will find `gamekit`'s one quite similar. Several functions with names starting
-with `draw-` exists to help you draw primitives like lines, rectangles, ellipses, arcs, polygons
-or even bezier curves. Images can be drawn via [`#'draw-image`](#gamekit-draw-image) and text
-with customizable font can be put onto canvas via [`#'draw-text`](#gamekit-draw-text).
+`gamekit` provides simple to use but versatile drawing API. If you know how
+HTML5 canvas API is organized you will find `gamekit`'s one quite
+similar. Several functions with names starting with `draw-` exists to help you
+draw primitives like lines, rectangles, ellipses, arcs, polygons or even bezier
+curves. Images can be drawn via [`#'draw-image`](#gamekit-draw-image) and text
+with customizable font can be put onto canvas via
+[`#'draw-text`](#gamekit-draw-text).
+
+Oftentimes it is useful to know dimensions of the visual resources to position
+them correctly. [`#'image-width`](#gamekit-image-width) and
+[`#'image-height`](#gamekit-image-height) can help you with retreiving image
+dimensions while [`#'calc-text-bounds`](#gamekit-calc-text-bounds) will allow
+you to calculate text bounding box.
 
 Canvas transformation operations are supported too. You can scale, translate, rotate a canvas
 with [`#'scale-canvas`](#gamekit-scale-canvas),
@@ -164,13 +186,36 @@ be invoked when user moves a mouse. Callbacks provided are not stacked together,
 try to bind multiple callbacks to the same button only last callback is actually going to be
 invoked. Same goes for cursor input.
 
+`gamekit` also support gamepads and exposing them as generic [xbox
+controllers](http://compat.cemu.info/w/images/2/2c/360_controller.svg). You can
+listen to gamepads being connected and disconnected with
+[`#'bind-any-gamepad`](#gamekit-bind-any-gamepad). Unfortunately, `gamekit`
+doesn't have a reliable way to numerate gamepads, so gamepad-related functions
+operate on opaque gamepad references and you need manage player<->gamepad
+relationship yourself.
+
+For listening to gamepad buttons you can use
+[`#'bind-gamepad-button`](#gamekit-bind-gamepad-button) and
+[`#'bind-gamepad-any-button`](#gamekit-bind-gamepad-any-button).
+[`#'bind-gamepad-dpad`](#gamekit-bind-gamepad-dpad) can help to catch changes in
+d-pad state. [`#'bind-gamepad-stick`](#gamekit-bind-gamepad-stick) and
+[`#'bind-gamepad-trigger`](#gamekit-bind-gamepad-trigger) can help tracking
+position of right and left sticks and values of left and right triggers
+accordingly.
+
+Sometimes `gamekit` wouldn't be able to recognize your gamepad. In this case you
+need to specify path to custom controller mapping file in [SDL2
+format](https://github.com/gabomdq/SDL_GameControllerDB/blob/master/gamecontrollerdb.txt)
+in `BODGE_GAMECONTROLLERDB` environment variable.
+
+
 ## Building a distributable
 
-Sharing a Common Lisp game in a binary form amongst users was always a bit of a pain. But fear
-no more! `gamekit` includes a mechanism for delivering your game packaged using only a single
-function - [`#'deliver`](#gamekit-deliver). It will build an executable, pack all required
-resources, copy needed foreign libraries used by `trivial-gamekit` and compress all that into a
-shippable archive.
+Sharing a Common Lisp game in a binary form amongst users was always a bit of a
+pain. But fear no more! `gamekit` includes a mechanism for delivering your game
+packaged using only a single function - [`#'deliver`](#gamekit-deliver). It will
+build an executable, pack all required resources, copy needed foreign libraries
+used by `trivial-gamekit` and compress all that into a shippable archive.
 
 To gain access to this function you need additionally load `:trivial-gamekit/distribution`
 system, and then you would be able to find it in `gamekit.distribution` package.
