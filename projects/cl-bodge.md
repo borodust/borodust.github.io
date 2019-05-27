@@ -6,15 +6,16 @@ parent: projects
 
 ## Introduction
 
-`cl-bodge` is a cross-platform Common Lisp application framework tailored for game development
-needs. It unites diverse libraries and OS facilities under a single consistent interface and,
-consequently, smoothes interoperability across different subsystems: resource handling,
-graphics, audio, physics, GUI and many other aspects of an application or, ultimately, a game.
+`cl-bodge` is a cross-platform Common Lisp application framework tailored for
+game development needs. It unites diverse libraries and OS facilities under a
+single consistent interface and, consequently, smoothes interoperability across
+different subsystems: resource handling, graphics, audio, physics, GUI and many
+other aspects of an application or, ultimately, a game.
 
 
-`cl-bodge` is highly modular and extensible. It is split into several subsystems and you are
-free to use only what is required for your particular needs or you can write a subsystem
-yourself!
+`cl-bodge` is highly modular and extensible. It is split into several subsystems
+and you are free to use only what is required for your particular needs or you
+can write a subsystem yourself!
 
 
 1. [Requirements](#requirements)
@@ -60,7 +61,8 @@ GitHub repository: [cl-bodge]({{ site.borodust.github }}/cl-bodge)
   Common Lisp
 
 ## Support
-`cl-bodge` is an experimental one-man project so far - things could break. And if they do, feel
-free to contact me via [email](mailto:dev@borodust.org) or find me and awesome `#lispgames`
-community chatting on [`#lispgames`](https://webchat.freenode.net/?channels=lispgames) channel at
+`cl-bodge` is an experimental one-man project so far - things could break. And
+if they do, feel free to contact me via [email](mailto:dev@borodust.org) or find
+me and awesome `#lispgames` community chatting on
+[`#lispgames`](https://webchat.freenode.net/?channels=lispgames) channel at
 `irc://chat.freenode.net`.

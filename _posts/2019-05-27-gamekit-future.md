@@ -1,6 +1,6 @@
 ---
 layout: post
-title: trivial-gamekit future
+title: trivial-gamekit's future
 excerpt_separator: <!-- excerpt -->
 ---
 
@@ -27,9 +27,8 @@ Here's my answer.
 
 With latest additions to `gamekit` (gamepad support and customizable rendering
 and logic update rates) I think its API is rich enough while still quite simple
-to use with sensible defaults. Backward compatibility is also a very important
-concern: no change will be made in public `gamekit` API that would break
-existing projects based on it.
+to use. Backward compatibility is a very important goal: no change will be made
+in public `gamekit` API that would break existing projects based on it.
 
 All this means it is unlikely `gamekit` itself would see any substantial API
 changes in the future. I think it serves its purpose very well right now and
@@ -38,12 +37,12 @@ bugs or you think it still misses an essential feature - fire an issue or
 contact me directly and we will resolve all those problems together.
 
 At this point you might have thought that this is a bit sad news - `gamekit` has
-so much potential. And you are right! And here goes new chapter in
-`trivial-gamekit` development :)
+so much potential. You are right! And here goes new chapter in `trivial-gamekit`
+development :)
 
-Instead of extending `gamekit` API indefinitely making it less and less suitable
-for simple games, much harder to understand and derailing it farther away from
-its initial goals, new features, experimental or not, are going to be
+Instead of extending `gamekit` API indefinitely (making it less and less
+suitable for simple games, much harder to understand and derailing it farther
+away from its initial goals), new features, experimental or not, are going to be
 implemented as plugins!
 
 One day while looking into ways to handle complexity in `gamekit`-based games I
@@ -60,14 +59,14 @@ of the kind I found useful for jam games:
   `gamekit`-based games
 
 [trivial-gamekit-input-handler](https://github.com/borodust/trivial-gamekit-input-handler)
-: Utility class for switching and controlling input in trivial-gamekit - handy
-  for enabling and disabling different control schemes especially when
-  transition between game states
+: Utility class for switching and controlling input in `trivial-gamekit` - handy
+  for enabling and disabling different control schemes at any point of time,
+  especially when transitioning between game states (menu->play->pause->play etc)
 
 [trivial-gamekit-postproc](https://github.com/borodust/trivial-gamekit-postproc)
 : Shader-based post-processing in `gamekit`! Also allows you to change
   resolution of the underlying framebuffer, meaning you can render your game
-  undersampled (true 256×224 resolution on HiDPI displays anyone?) or
-  supersampled (8k on FullHD displays - let the world burn in gpu heat).
+  undersampled (true unblurred 256×224 resolution on HiDPI displays anyone?) or
+  supersampled (8k on FullHD displays - let the world burn in gpu heat)
 
 More to come! :)

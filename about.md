@@ -16,8 +16,7 @@ At this very moment I'm working on a game engine called [cl-bodge]({{ site.baseu
 
 Online presence:
 * [GitHub]({{ site.borodust.github }})
-* [Facebook]({{ site.borodust.facebook }})
-* [Twitter]({{ site.borodust.twitter }})
-* IRC: `#lispgames` at `irc://chat.freenode.net`
+* [Keybase]({{ site.borodust.keybase }})
+* [IRC](https://webchat.freenode.net/?channels=#lispgames): `#lispgames` at `irc://chat.freenode.net`
 
 </div>
