@@ -241,6 +241,6 @@ projects/trivial-gamekit/advanced.md %}) section.
 {% include_relative ref/math.md %}
 {% include_relative ref/locating-resources.md %}
 {% include_relative ref/drawing.md %}
-{% include_relative ref/playing-an-audio.md %}
+{% include_relative ref/playing-audio.md %}
 {% include_relative ref/listening-to-input.md %}
 {% include_relative ref/building-a-distributable.md %}
