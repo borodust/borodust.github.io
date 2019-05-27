@@ -18,7 +18,7 @@ Template for function references:
 * [Math](#math)
 * [Locating resources](#locating-resources)
 * [Drawing](#drawing)
-* [Playing an audio](#playing-an-audio)
+* [Playing audio](#playing-audio)
 * [Listening to input](#listening-to-input)
 * [Building a distributable](#building-a-distributable)
 * [Symbol Index](#symbol-index)
@@ -175,7 +175,7 @@ All origins or positions are represented by two-dimensional (x,y) vectors create
 [`#'vec4`](#gamekit-vec4) consisting of red, green, blue and alpha channels each within 0.0-1.0
 range.
 
-## Playing an audio
+## Playing audio
 
 Audio can substantially boost game's atmosphere, and `gamekit` is ready to serve you well in this
 regard too. [`#'play-sound`](#gamekit-play-sound) will help with getting sounds to reach your
