@@ -48,7 +48,7 @@ implemented as plugins!
 One day while looking into ways to handle complexity in `gamekit`-based games I
 discovered it actually is quite extendable. Just inherit a class in `defgame`
 form with special functionality you need, hook into `gamekit` instance methods
-(`#'draw`, `#'act`, `#'post-initialize` and friends), provide some
+(`#'draw`, `#'act`, `#'post-initialize` and `#'pre-destroy`), provide some
 `:default-initargs` and you can go quite far in extending its functionality.
 
 So here I present a new way of extending `gamekit` - _kinda_ plugins. And first
