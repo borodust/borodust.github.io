@@ -21,6 +21,7 @@ Template for function references:
 * [Playing audio](#playing-audio)
 * [Listening to input](#listening-to-input)
 * [Building a distributable](#building-a-distributable)
+* [Troubleshooting](#troubleshooting)
 * [Symbol Index](#symbol-index)
 
 
@@ -230,9 +231,43 @@ system, and then you would be able to find it in `gamekit.distribution` package.
 (ql:quickload :trivial-gamekit/distribution)
 ```
 
-For building these packages for `Windows`, `GNU/Linux` and `macOS` with just a single push to a
-`github` or `gitlab` respository check out [Advanced Features]({% link
-projects/trivial-gamekit/advanced.md %}) section.
+For building these packages for `Windows`, `GNU/Linux` and `macOS` with just a
+single push to a `github` or `gitlab` respository check out [Advanced
+Features]({% link projects/trivial-gamekit/advanced.md %}) section.
+
+## Troubleshooting
+
+#### Restarts
+Common Lisp is well known for its superior interactive development capabilities,
+and when things go left you often can fix problem live without restarting an
+image. `gamekit` strives to embrace this approach as much as possible. But
+beware, under the hood `gamekit` uses quite an intricate machinery and it still
+is possible to break it beyond live repairement.
+
+Important thing to keep in mind: don't invoke `'abort` restart that quit
+threads. It's too easy, because `q` button in `slime` or `sly` is bound to quit
+action in debugger which invokes most destroying restart possible. It often
+works in other applications, but in complex multithreaded environments it can be
+disastrous. It's quite hard (if impossible) to restore `gamekit` state after any
+of its internal threads are killed. Just don't press `q`.
+
+`sly` and `slime` has other more useful button bindings available: `c` - for
+`'continue` restart and `a` for topmost `'abort` restart. `gamekit` binds those
+exact restarts to gracefully handle failures. `'continue` will try to skip the
+offending block of code and `'abort` will try to shutdown engine gracefully
+altogether after which you should be able to start your game with
+`#'gamekit:start`. The latter one is not very interactive-friendly obviously,
+and should be the last resort before restarting the whole image (lisp process).
+
+Another restart that isn't bound to a key but super useful is
+`'rerun-flow-block`. Ivoking it will prompt `gamekit` to rerun a code the error
+was in. Fixing the error, reevaluating the code and invoking this restart should
+bring your game back to working state. This is the restart you might want to use
+the most.
+
+`'skip-flow-block` restart does the same thing as `'continue` - skips the code
+with the error.
+
 
 ## Symbol Index
 {% include_relative ref/symbol-index.md %}
