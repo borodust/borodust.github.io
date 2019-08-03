@@ -272,6 +272,11 @@ the most.
 `'skip-flow-block` restart does the same thing as `'continue` - skips the code
 with the error.
 
+#### Only one active system of type 'appkit-system is allowed
+Invoke `(gamekit:stop)` in REPL and then try running your game again by invoking
+`#'gamekit:start` with required params. If that didn't help - reload a lisp
+image.
+
 
 ## Symbol Index
 {% include_relative ref/symbol-index.md %}
