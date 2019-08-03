@@ -31,6 +31,7 @@
 * [define-binary](#gamekit-define-binary)
 * [make-font](#gamekit-make-font)
 * [prepare-resources](#gamekit-prepare-resources)
+* [dispose-resources](#gamekit-dispose-resources)
 * [notice-resources](#gamekit-notice-resources)
 * [get-text](#gamekit-get-text)
 * [get-binary](#gamekit-get-binary)

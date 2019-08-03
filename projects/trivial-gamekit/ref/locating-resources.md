@@ -143,6 +143,24 @@ Example:
 ```
 </div>
 
+*function* ***`dispose-resources`*** `(&rest resource-names)`
+{: #gamekit-dispose-resources}
+<div class="bodge-docstring" markdown="block">
+Disposes prepared resources asynchronously. `resource-names`
+should be symbols used previously registered with `define-*` macros.
+
+This function returns immediately. Attempts to use disposed resources will raise
+an error. To use resources again you would need to load them with
+[`#'prepare-resources`](#gamekit-prepare-resources).
+
+Example:
+```common-lisp
+ (gamekit:dispose-resources 'example-package::noto-sans
+                            'example-package::blop
+                            'example-package::logo)
+```
+</div>
+
 *generic* ***`notice-resources`*** `(game &rest resource-names)`
 {: #gamekit-notice-resources}
 <div class="bodge-docstring" markdown="block">

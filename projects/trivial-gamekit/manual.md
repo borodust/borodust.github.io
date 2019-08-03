@@ -124,13 +124,17 @@ Resources are used by functions that requires them to operate, like
 [`#'draw-image`](#gamekit-draw-image), [`#'make-font`](#gamekit-make-font),
 [`#'play-sound`](#gamekit-play-sound) and others.
 
-When [`defgame`](#gamekit-defgame) option `:prepare-resources` is set to `nil`, you would need
-to request resources manually by calling [`#'prepare-resources`](#gamekit-prepare-resources)
-with resource ids you need. Preparation can take a while, so
-[`#'prepare-resources`](#gamekit-prepare-resources) asynchonously requests resources and returns
-immediately for you to be notified later with [`#'notice-resources`](#gamekit-notice-resources).
-This is useful, when you don't want to wait until all assets are loaded and start rendering some
-loading or start screen right away and continue with game after all resources are ready.
+When [`defgame`](#gamekit-defgame) option `:prepare-resources` is set to `nil`,
+you would need to request resources manually by calling
+[`#'prepare-resources`](#gamekit-prepare-resources) with resource ids you
+need. Preparation can take a while, so
+[`#'prepare-resources`](#gamekit-prepare-resources) asynchonously requests
+resources and returns immediately for you to be notified later with
+[`#'notice-resources`](#gamekit-notice-resources).  This is useful, when you
+don't want to wait until all assets are loaded and start rendering some loading
+or start screen right away and continue with game after all resources are ready.
+If you have a lot of resources and would like to get rid of unneded ones to free
+some memory, you can use [`#'dispose-resources`](#gamekit-dispose-resources).
 
 Sometimes you would want to ship a game with custom resources not supported by
 `gamekit` directly. To accomplish that, you can use
