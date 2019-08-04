@@ -4,10 +4,16 @@ body, html {
     color: #dadada;
 }
 
+@media (min-width: 38em) {
+  html {
+    font-size: large;
+  }
+}
+
 h1, h2, h3, h4, h5, h6 {
     margin-bottom: .5rem;
     font-weight: bold;
-    line-height: 1.25;
+    line-height: 1.15;
     color: #dcdcdc;
     text-rendering: optimizeLegibility;
 }
