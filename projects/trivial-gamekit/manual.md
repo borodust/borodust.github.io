@@ -90,35 +90,25 @@ Resources are very important for games. Textures, models, sounds, fonts,
 animations, tiles - you name it. `gamekit` has several routines prepared for you
 to ease the handling of those.
 
-First of all, we need to tell `gamekit` where to find resources. `gamekit`
-resources are associated with Common Lisp packages. Any package can have
-associated filesystem directory to find resources in. Call
-[`#'register-resource-package`](#gamekit-register-resource-package) as a
-toplevel form to bind a directory to a package. Absolute paths required
-here. Below I'll try to explain why we need this package-directory association.
-
-Before diving deeper, lets see how resources are defined. You tell `gamekit`
-what resources to load and use via [`#'define-image`](#gamekit-define-image),
-[`#'define-sound`](#gamekit-define-sound) or
+First of all, we need to tell `gamekit` where to find resources via
+[`#'define-image`](#gamekit-define-image),
+[`#'define-sound`](#gamekit-define-sound) and
 [`#'define-font`](#gamekit-define-font) macros. First argument to them is a
 symbol that would become an identificator for the resource and the second
-argument is a relative path to the resource. Path can also be absolute, just be
-sure to use helper functions like `asdf:system-relative-pathname` to avoid
-hardcoding paths to your resources in the code.
+argument is a absoulute or relative path to the resource.
 
-Now, when `gamekit` knows absolute path to root and relative paths to resouces,
-it can locate and prepare them to use in a game. To find absolute path to a
-certain resource `gamekit` looks into its id and extracts the package (resource
-identificators must be symbols), then searches for registered package-directory
-association and extracts absolute path for the package from there and finally
-`gamekit` combines absolute path of a package with resource's relative path and
-can locate it exactly.
+For absolute path, be sure to use helper functions like
+`asdf:system-relative-pathname` to avoid hardcoding paths to your resources in
+the code.
 
-This seemingly confusing mechanism was implemented for several games to coexist
-in one lisp image. Unless you use keywords or common packages like `:cl-user`,
-resources are going to be uniquely identified and each game will load its own
-resources correctly. Another usage scenario is an `asdf` system with just a
-resources and their definitions for sharing between fellow game developers.
+To use relative resource path, you first need to specify resource root
+directory. Resource roots are associated with Common Lisp packages. Any package
+can have associated filesystem directory to find resources in. Call
+[`#'register-resource-package`](#gamekit-register-resource-package) as a
+toplevel form to bind a directory to a package. Absolute paths required here.
+Once done, you can specify relative path in `define-*` forms and `gamekit` would
+merge resource root pathname associated with a package of a symbol (first
+argument to `define-*`) with relative pathname you provided.
 
 Resources are used by functions that requires them to operate, like
 [`#'draw-image`](#gamekit-draw-image), [`#'make-font`](#gamekit-make-font),
