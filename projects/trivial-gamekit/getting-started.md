@@ -235,11 +235,11 @@ mouse buttons, and for keys you can use values such as `:a`, `:b`, `:c`, ...,
 gamekit which particular button state to assign action to. Available states are
 `:pressed`, `:released` and `:repeating`. And finally, last argument is a
 function without arguments which will be called when specified key or button
-reaches supplied state.
+reaches provided state.
 
-To grab cursor movement one can use `#'bind-cursor` function. Its only argument
-represents a function of two arguments - x and y of mouse cursor position. The
-latter is called every time mouse cursor changes its location.
+To grab a cursor movement one can use `#'bind-cursor` function. Its only
+argument represents a function of two arguments - x and y of a mouse cursor
+position. The latter is called every time a mouse cursor changes its location.
 
 
 ## Assets
@@ -260,7 +260,7 @@ ellipses, lines, curves, etc. But for very intricate objects it is still much
 easier to just display a prepared image. `trivial-gamekit` ready to help you
 with this too.
 
-First, we need to tell gamekit where it can find our image.  We would use
+First, we need to tell gamekit where it can find our image. We will use
 `define-image` for that:
 
 ```common-lisp
@@ -275,7 +275,7 @@ merging it with a relative path specified in a second argument of
 ignored. First argument of that function is used to reference this image in
 other places later. `define-image` supports only .png images yet.
 
-No need to tell gamekit anything else - your image should have been already
+No need to tell `gamekit` anything else - your image should have been already
 loaded.
 
 To put an image onto the screen you can use `#'gamekit:draw-image`. It has two
@@ -303,7 +303,7 @@ A face appears!
 ### Sounds
 
 `trivial-gamekit` can help you with tricking not only player eyes, but ears too.
-First, let's inform the gamekit where it can locate a sound with `define-audio`
+First, let's inform the `gamekit` where it can locate a sound with `define-audio`
 macro. It supports a couple audio formats including `.ogg` (Ogg/Vorbis), `.flac`
 and `.wav`.
 
