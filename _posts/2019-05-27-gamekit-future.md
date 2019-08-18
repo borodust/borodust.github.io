@@ -14,9 +14,9 @@ are quite a number of submissions based on
 * [Lispout](https://itch.io/jam/lisp-game-jam-2019/rate/410429)
 
 Thanks to everyone who participated and I'm especially grateful to authors of
-above games for their trust in `gamekit`. Any jam is quite a stress and having
-solid tools during this time is quite important. Thank you for giving `gamekit`
-a chance!
+above games for their trust in `gamekit`. Any jam is a stress and having solid
+tools during this time is very important. Thank you for giving `gamekit` a
+chance!
 
 I've received a couple questions about `trivial-gamekit` future and what
 direction it is heading.
@@ -49,7 +49,7 @@ One day while looking into ways to handle complexity in `gamekit`-based games I
 discovered it actually is quite extendable. Just inherit a class in `defgame`
 form with special functionality you need, hook into `gamekit` instance methods
 (`#'draw`, `#'act`, `#'post-initialize` and `#'pre-destroy`), provide some
-`:default-initargs` and you can go quite far in extending its functionality.
+`:default-initargs` and you can go far in extending its functionality.
 
 So here I present a new way of extending `gamekit` - _kinda_ plugins. And first
 of the kind I found useful for jam games:
