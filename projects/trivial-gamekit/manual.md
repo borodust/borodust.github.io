@@ -123,7 +123,7 @@ resources and returns immediately for you to be notified later with
 [`#'notice-resources`](#gamekit-notice-resources).  This is useful, when you
 don't want to wait until all assets are loaded and start rendering some loading
 or start screen right away and continue with game after all resources are ready.
-If you have a lot of resources and would like to get rid of unneded ones to free
+If you have a lot of resources and would like to get rid of unneeded ones to free
 some memory, you can use [`#'dispose-resources`](#gamekit-dispose-resources).
 
 Sometimes you would want to ship a game with custom resources not supported by
