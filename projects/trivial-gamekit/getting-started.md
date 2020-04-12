@@ -12,6 +12,12 @@ this guide step by step copy-pasting code snippets right into the REPL. Whole
 code of this little piece with almost every snippet included can be found at the
 [end](#result) of this guide.
 
+There's a [vid on YouTube](https://www.youtube.com/watch?v=iR2Yy5rfHzQ) that
+loosely follows this guide. It can help you understand how the development
+process with `trivial-gamekit` looks like and how to start development from the
+scratch.  The progress in the vid is very slow and unstructured: feel free to
+skip sections and rewind back if something stopped to make sense.
+
 ## Basics
 
 First we need to install `trivial-gamekit` system. This is quite easy to
