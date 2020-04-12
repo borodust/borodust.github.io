@@ -45,7 +45,7 @@ env:
   - GAMEKIT_SYSTEM_NAME: example
   - GAMEKIT_APPLICATION_PACKAGE: example-package
   - GAMEKIT_APPLICATION_MAIN_CLASS: example
-  - PATH: ~/bin/:$PATH
+  - PATH: ~/.bodge/bin/:$PATH
   - GAMEKIT_TARGET_PACKAGE: $GAMEKIT_SYSTEM_NAME-x86-64-$TRAVIS_OS_NAME-$TRAVIS_BRANCH.zip
   - GAMEKIT_BUILD_DIR: /tmp/$GAMEKIT_SYSTEM_NAME
   - secure: "your+encrypted+data+containing+GITHUB_TOKEN=githubaccesstoken"
@@ -60,10 +60,11 @@ os:
 
 install:
   - curl -L http://bodge.borodust.org/files/install.sh | sh
+  - lisp install-dist
 
 script:
   - >
-    lisp $HOME/bodge/scripts/build-gamekit-system.lisp
+    lisp build-gamekit-system
     $GAMEKIT_SYSTEM_NAME $GAMEKIT_APPLICATION_PACKAGE $GAMEKIT_APPLICATION_MAIN_CLASS
     $TRAVIS_BUILD_DIR
     $GAMEKIT_BUILD_DIR
@@ -151,10 +152,11 @@ install:
   - pacman --noconfirm -Syu
   - pacman --noconfirm -S zip
   - sh -c "curl -L http://bodge.borodust.org/files/install.sh | sh"
+  - sh -c "$HOME/.bodge/bin/lisp install-dist"
 
 build_script:
   - >
-    sh -c "$HOME/bin/lisp $HOME/bodge/scripts/build-gamekit-system.lisp
+    sh -c "$HOME/.bodge/bin/lisp build-gamekit-system
     %GAMEKIT_SYSTEM_NAME% %GAMEKIT_APPLICATION_PACKAGE% %GAMEKIT_APPLICATION_MAIN_CLASS%
     $(cygpath -u '%APPVEYOR_BUILD_FOLDER%')
     $(cygpath -u '%GAMEKIT_BUILD_DIR%')"
