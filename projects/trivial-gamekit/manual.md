@@ -268,6 +268,13 @@ Invoke `(gamekit:stop)` in REPL and then try running your game again by invoking
 image.
 
 
+#### Deliver fails
+* Make sure your game does not depend on `trivial-gamekit/distribution` or
+`trivial-gamekit/documentation`
+* Don't start your game upon loading - create a utility function with call to
+  `#'gamekit:start` inisde and call it from REPL manually
+
+
 ## Symbol Index
 {% include_relative ref/symbol-index.md %}
 

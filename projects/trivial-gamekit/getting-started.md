@@ -34,7 +34,7 @@ manage our application:
 ```
 
 Yes. That's it. You totally configured an application that can draw onto screen,
-play audio and listen for user input. Let's confirm it works:
+play audio and listen for user input. Let's confirm it works. Evaluate in REPL:
 
 ```common-lisp
 (gamekit:start 'hello-gamekit)
@@ -68,7 +68,7 @@ by using your OS UI or with
   (:viewport-title "Hello Gamekit!"))  ; window's title
 ```
 
-Alrighty, let's bring a window back to continue our endeavor:
+Alrighty, let's bring a window back to continue our endeavor. Evaluate in REPL:
 
 ```common-lisp
 (gamekit:start 'hello-gamekit)
