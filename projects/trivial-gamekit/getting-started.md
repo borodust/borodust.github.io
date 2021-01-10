@@ -24,6 +24,12 @@ First we need to install `trivial-gamekit` system. This is quite easy to
 accomplish thanks to `Quicklisp`. Check out [this small tip]({% link
 projects/trivial-gamekit.md %}#installation-and-loading) on how to do that.
 
+If you use bare REPL (what is provided directly by implementation and not by
+your editor) and MacOS, unfortunately, REPL might hang after you invoke
+`#'gamekit:start`. This is due to MacOS requirement for running all graphics
+related code in the main thread. Bare REPL is often running in the main thread
+too. Please, use editor's REPL (Emacs+SLIME/SLY, Atom+SLIMA, Vim+SLIMV).
+
 ### Starting up
 
 Now, when the system is successfully loaded, let's define a main class that will
