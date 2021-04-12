@@ -8,9 +8,9 @@ root: true
 
 <div markdown="block" class="intro-text">
 
-My name is Pavel Korolev. I'm a
-professional [Java](https://en.wikipedia.org/wiki/Java_(programming_language)) software
-developer and this is my favorite blog on the internet. My language of choice is [Common Lisp](https://en.wikipedia.org/wiki/Common_Lisp) though.
+My name is Pavel Korolev. I'm a software engineer and this is my favorite blog
+on the internet. My language of choice is [Common
+Lisp](https://en.wikipedia.org/wiki/Common_Lisp).
 
 At this very moment I'm working on a game engine called [cl-bodge]({{ site.baseurl }}{% link projects/cl-bodge.md %}). Join us at [`#lispgames`](http://lispgames.org) to dive into secret alien technology of making games with Lisp!
 
