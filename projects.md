@@ -16,7 +16,3 @@ id: projects
 
 [trivial-gamekit]({% link projects/trivial-gamekit.md %})
 : Simple framework for getting into game development with Common Lisp
-
-
-[びの訳]({% link projects/vinoyaku.md %})
-: macOS tool for machine-assisted reading from a screen

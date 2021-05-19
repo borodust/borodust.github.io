@@ -12,11 +12,11 @@ My name is Pavel Korolev. I'm a software engineer and this is my favorite blog
 on the internet. My language of choice is [Common
 Lisp](https://en.wikipedia.org/wiki/Common_Lisp).
 
-At this very moment I'm working on a game engine called [cl-bodge]({{ site.baseurl }}{% link projects/cl-bodge.md %}). Join us at [`#lispgames`](http://lispgames.org) to dive into secret alien technology of making games with Lisp!
+At this very moment I'm working on a game foundation framework called [alien-works](https://github.com/borodust/alien-works). Join us at [`#lispgames`](http://lispgames.org) to dive into secret alien technology of making games with Lisp!
 
 Online presence:
 * [GitHub]({{ site.borodust.github }})
 * [Keybase]({{ site.borodust.keybase }})
-* [IRC](https://webchat.freenode.net/?channels=#lispgames): `#lispgames` at `irc://chat.freenode.net`
+* [IRC](irc://irc.libera.chat:6697): `#lispgames` at `irc://irc.libera.chat:6697`
 
 </div>
