@@ -63,6 +63,5 @@ GitHub repository: [cl-bodge]({{ site.borodust.github }}/cl-bodge)
 ## Support
 `cl-bodge` is an experimental one-man project so far - things could break. And
 if they do, feel free to contact me via [email](mailto:dev@borodust.org) or find
-me and awesome `#lispgames` community chatting on
-[`#lispgames`](https://webchat.freenode.net/?channels=lispgames) channel at
-`irc://chat.freenode.net`.
+me and awesome `#lispgames` community chatting in `#lispgames` channel at
+`irc://libera.chat:6697`.

@@ -95,5 +95,5 @@ Things break and `trivial-gamekit` is no exception. Feel free to fire an
 [issue](https://github.com/borodust/trivial-gamekit/issues) when that happens
 and we will try to figure out a solution together!
 
-Also you can find me and awesome `#lispgames` community chatting on `#lispgames`
-channel at `irc://chat.freenode.net`.
+Also you can find me and awesome `#lispgames` community chatting in `#lispgames`
+channel at `irc://libera.chat:6697`.
