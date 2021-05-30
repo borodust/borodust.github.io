@@ -4,12 +4,6 @@ body, html {
     color: #dadada;
 }
 
-@media (min-width: 38em) {
-  html {
-    font-size: large;
-  }
-}
-
 h1, h2, h3, h4, h5, h6 {
     margin-bottom: .5rem;
     font-weight: bold;
@@ -23,11 +17,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 code {
-    color: #b15f67;
+    color: #87bd63;
     background-color: #353535;
 }
 
 a {
+    color: #d8ba42;
+}
+
+a code {
+    text-decoration: underline;
+}
+
+a code:hover {
     color: #d8ba42;
 }
 
@@ -87,7 +89,43 @@ ul {
     list-style-type: none;
 }
 
+.bodge-docstring {
+    padding-left: 3em;
+}
+
+.layout-reverse .content {
+    margin: auto;
+}
+
+.footnotes {
+    border-top: dashed #624343;
+    margin-top: 3rem;
+}
+
+@media (min-width: 38em) {
+    html {
+        font-size: large;
+    }
+
+    .layout-reverse {
+        padding-right: 0;
+    }
+
+    .layout-reverse .content {
+        margin: auto;
+    }
+}
+
 @media (min-width: 48em) {
+    .layout-reverse {
+        padding-right: 22rem;
+        padding-left: 2rem;
+    }
+
+    .layout-reverse .content {
+        margin: auto;
+    }
+
     .subpage-list {
         text-align: initial;
     }
@@ -103,8 +141,4 @@ ul {
     .intro-text {
         padding-left: 12em;
     }
-}
-
-.bodge-docstring {
-    padding-left: 3em;
 }
