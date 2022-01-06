@@ -83,7 +83,7 @@ gamepad input.
 [Pong Fight](https://github.com/eliasfeijo/cl-pong-game) by [Elias Feijo](https://github.com/eliasfeijo)
 : A simple Pong game made for [Lisp Game Jam 2019](https://itch.io/jam/lisp-game-jam-2019/rate/413733) entry
 
-[Decent Magician Of the Moldy Dungeon](https://gitlab.com/decent-username/dmomd) by [decent-username](https://gitlab.com/decent-username) and [moldybits](https://gitlab.com/moldybits)
+[Decent Magician Of the Moldy Dungeon](https://codeberg.org/artchad/dmomd/src/commit/0a04f2c4d6592cfa43d9498eb23757d6ad4da963) by [artchad (aka decent-username)](https://codeberg.org/artchad) and [moldybits](https://gitlab.com/moldybits)
 : A rogue-like RPG with turn based movement and combat: [Lisp Game Jam
   2019](https://itch.io/jam/lisp-game-jam-2019/rate/415397) entry
 
