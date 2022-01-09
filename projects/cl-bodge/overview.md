@@ -26,7 +26,7 @@ interoperable systems.
 You are not required to use any of `cl-bodge` subsystems apart from
 `cl-bodge/engine`. Want to build your own engine from scratch, but lazy enough
 to wrap all the basic stuff yourself? Sure!  Just use `cl-bodge/engine` as a
-fundation. Maybe the only thing you need is access to host input and window?
+foundation. Maybe the only thing you need is access to host input and window?
 Sure! Only add `cl-bodge/host` to your dependencies and nothing else of
 `cl-bodge` will be loaded keeping your CL image clean of unnecessary bits. Would
 like to use physics? No probs here either! `cl-bodge/physics` is at your
